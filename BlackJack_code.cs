@@ -67,22 +67,79 @@ namespace Blackjack
         }
 
         //딜러가 분배한 카드의 정보를 출력하여 볼 수 있게 해주는 함수
-        static public void show_card(Card card)
+        static public void Show_Card(Player[] players)
         {
+            Console.WriteLine("----딜러의 카드----");
+            int num_card1 = players[0].player_cards.Length;
+            for (int i = 0; i < num_card1; i++)
+            {
+                Console.Write("{0}{1} ", players[0].player_cards[i].shape, players[0].player_cards[i].number);
+            }
+            Console.WriteLine();
+            Console.WriteLine("----딜러의 점수----");
+            Console.Write(players[0].score);
+
+
+            Console.WriteLine("----플레이어의 카드----");
+            int num_card2 = players[1].player_cards.Length;
+            for (int i = 0; i < num_card2; i++)
+            {
+                Console.Write("{0}{1} ", players[1].player_cards[i].shape, players[1].player_cards[i].number);
+            }
+            Console.WriteLine();
+            Console.WriteLine("----플레이어의 점수----");
+            Console.Write(players[1].score);
+
+
         }
 
-        //플레이어가 이후 힛을 할지, 스테이를 할지 결정해주는 함수
-        static public void hit_or_stay(Player player)
+
+        static public void Hit(Player player, Card[] all_card)
         {
+            int num_cards = player.player_cards.Length;
+            player.player_cards[num_cards] = all_card[deal];
         }
+
+
+        //플레이어가 이후 힛을 할지, 스테이를 할지 결정해주는 함수
+        static public int HitOrSstay(Player player)
+        {
+            Console.WriteLine("----Hit 또는 Stay를 입력하여 결정해주세요.----");
+            string hit_or_stay = Console.ReadLine();
+            if (hit_or_stay == "Hit")
+            {
+                Hit(player, all_card);
+                return 1;
+            }
+            else if (hit_or_stay == "Stay")
+            {
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine("----잘못된 명령어가 입력되었습니다.----");
+                Console.WriteLine("----다시 입력해주세요.----");
+                return -1;
+            }
+        }
+
 
         /*처음 2장의 카드를 받은 이후 더블다운을 결정하면 1장만 힛으로
         더 받기로 하고 배팅을 2배로 한번 더 배팅할 수 있다.
         더블다운을 할 지 여부를 판단해줄 수 있는 함수*/
-        static public int Double_down(Player player)
+        static public int Doubledown(Player player)
         {
-            int bet = betting(player);
-            return bet;
+            Console.WriteLine("----더블다운을 하시겠습니까?----");
+            Console.WriteLine("----Yes or No로 입력해주세요.----");
+            string double_down = Console.ReadLine();
+            if (double_down == "Yes")
+            {
+                Hit(player, all_card);
+                Betting(player);
+                return 1;
+            }
+            else
+                return 0;
         }
 
         //첫 두장의 카드를 보고 그 판을 포기할 지 여부를 파악해주는 함수
