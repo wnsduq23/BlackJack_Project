@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 //코드 선언 내용이 아직 틀릴 수도 있음.
 namespace Blackjack
 {
-    
+
     class Program
     {
         //카드의 정보를 담고 있는 Card구조체 선언
@@ -34,7 +34,7 @@ namespace Blackjack
                 cash = 0;
             }
         }
-        
+
         //A카드,2~9, Q, J, K 각각 4장씩 총 52장의 카드가 있다.
         Card[] all_card = new Card[52];
 
@@ -62,7 +62,7 @@ namespace Blackjack
         //플레이어의 소지금 내에서 배팅 할 수 있도록 해주는 함수, 배팅 금액을 반환해준다.
         static public int betting(Player player)
         {
-            int bet=0;
+            int bet = 0;
             return bet;
         }
 
@@ -108,20 +108,89 @@ namespace Blackjack
 
         //최초 받는 2장의 카드가 같은 가치를 갖는 카드일 거라 예상한다면 미리 페어 배팅 가능
         //페어 배팅할지 여부를 확인해주는 함수
-        static public void pair_betting()
+        static public void PairBetting()
         {
-            
+            Console.WriteLine("You have a pair! You can make a pair bet up to your original bet.");
+            int pair_bet = AskForPairBet();
+            //pair betting을 하였다면
+            if (pair_bet > 0 && pair_bet <= player_bet)
+            {
+                Console.WriteLine("You bet {0} on your pair.", pairBet);
+            }
+        }
+        //이 돈을 받는 시점이 두 번째 카드가 공개된 시점이여서 확인과정 함수를 따로 나눔
+        static public void CheckPairBetting()
+        {
+            // 베팅한 금액의 11배를 받는다. 
+            if (player_card1 == player_card2)
+                player_money += pair_bet * 11;
+            else
+                player_money -= pair_bet;
         }
 
-        //상대가 블랙잭이 나올걸 대비해 베팅금액의 절반을 인슈어런스로 지불한다.
+        //상대가 블랙잭이 나올걸 대비해 베팅금액의 절반까지 인슈어런스로 지불할 수 있다.
         //인슈어런스 여부 확인 함수
-        static public void insuarance()
+        private bool dealer_has_ace;
+        static public void Insuarance()
         {
+            //딜러의 업카드가 Ace일 때 유저에게 묻는다.
+            if (dealer_has_ace)
+            {
+                if (AsKForInsurance())
+                {
+                    Conosole.WriteLine("You bought insurance.");
+                    //인슈어런스에 얼마를 베팅할지 (찾아보니 절반까지 배팅할 수 있는 듯?)
+                    int a = PlayerBettingToInsurance();
+                    //만약 딜러가 블랙잭이 맞았다면 
+                    if (dealer_score == 10)
+                    {
+                        Console.WriteLine("Dealer has blackjack. Insurance pays 2 to 1.");
+                        player_money += a * 2;
+                        player_betting_money = 0;
+                    }
+                    // 블랙잭이 아니였다면 
+                    else
+                    {
+                        Console.WriteLine("Dealer does not have blackjack. You lose your insurance bet.");
+                        player_money -= a;
+                        //플레이어가 블랙잭이였다면 
+                        if (player_score == 21)
+                            player_money += player_betting_money * 1.5;
+
+                    }
+                }
+            }
         }
+        private int PlayerBettingToInsurance()
+        {
+            Console.WriteLine("How much do you want to bet on insurance?");
+            string a = Console.ReadLine();
+            return (int.Parse(a));
+        }
+
 
         //소지금이 바닥나 게임이 모두 끝나 새 게임을 할 수 있도록 초기화해주는 함수
+        //소지금이 바닥난 경우는 여기가 아니라, 모든 user_money 계산 후에 0보다 작거나 같아지면 종료 확인을 해야할듯 ? 
         static public void reset_game()
         {
+            dealer_card = 0;
+            player_score = 0;
+            dealer_score = 0;
+            dealer_has_ace = false;
+
+            // 딜러랑 플레이어에게 카드 주기 
+            int player_card1 = GetRandomCard();
+            int player_card2 = GetRandomCard();
+            int dealer_card1 = GetRandomCard();
+            dealer_card = dealer_card1; // remember dealer's first card
+
+            player_score = player_card1 + player_card2;
+            dealer_score = dealer_card1;
+            dealer_has_ace = (dealer_card1 == 1);
+
+            //어떤 값 들어왔는 지 확인. 후에 딜러 카드 확인은 유저가 못하게 해야할 듯 
+            Console.WriteLine("Your cards: {0} and {1} (total = {2})", player_card1, player_card2, player_score);
+            Console.WriteLine("Dealer's card: {0}", dealer_card1);
         }
 
         //게임을 진행해주는 함수
