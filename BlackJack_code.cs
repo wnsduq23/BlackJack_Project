@@ -43,13 +43,37 @@ namespace Blackjack
         Player[] players = new Player[2];
 
         //52장의 카드인 all_card 배열에 카드의 정보(해당 카드의 숫자, 모양)를 담아 주기 위한 함수
-        public void push_information_card()
+        public void push_information_card(char Shape, int Number)
         {
+            Card card = new Card
+            {
+                shape = Shape,
+                number = Number
+            };
+
+            // 생성한 카드를 all_card 배열에 추가
+            for (int i = 0; i < all_card.Length; i++)
+            {
+                if (all_card[i].number == 0)
+                {
+                    all_card[i] = card;
+                    break;
+                }
+            }
         }
         //총 52장의 카드를 섞어 순서를 바꿔 줄 수 있는 함수
         public void shuffle()
         {
+            Random rnd = new Random(); //빌트인 클래스
+            for (int i = all_card.Length - 1; i >= 0; i--)
+            {
+                int j = rnd.Next(i + 1);
+                Card temp = all_card[j];
+                all_card[j] = all_card[i];
+                all_card[i] = temp;
+            }
         }
+
         //셔플 후 첫번째 카드부터 차례대로 딜러가 분배해주기 위한 카드 순서 deal변수
         public int deal = 0;
 
@@ -63,8 +87,31 @@ namespace Blackjack
         static public int betting(Player player)
         {
             int bet = 0;
+            bool isValidBet = false;
+            while (!isValidBet)
+            {
+                Console.Write($"You have {player.cash} cash. Place your bet: ");
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out bet)) // input이 정수형으로 변환될 수 있을때 bet에 값 넣기.
+                {
+                    if (bet > 0 && bet <= player.cash)
+                    {
+                        isValidBet = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Invalid bet amount. Bet must be between 1 and {player.cash}.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Bet must be a positive integer.");
+                }
+            }
+            player.cash -= bet;
             return bet;
         }
+
 
         //딜러가 분배한 카드의 정보를 출력하여 볼 수 있게 해주는 함수
         static public void show_card(Card card)
