@@ -117,12 +117,9 @@ namespace Blackjack
         //A카드,2~9, Q, J, K 각각 4장씩 총 52장의 카드가 있다.
         Card[] all_card = new Card[52];
 
-        //게임 이용자는 딜러와 배팅하는 이용자로 총 2명으로 가정한다.
-        //이 배열에서 딜러는 index=0, 플레이어는 index=1로 설정
-        Player[] players = new Player[2];
 
         //52장의 카드인 all_card 배열에 카드의 정보(해당 카드의 숫자, 모양)를 담아 주기 위한 함수
-        public void push_information_card(char Shape, int Number)
+        public void PushInformationCard(char Shape, int Number)
         {
             Card card = new Card
             {
@@ -141,7 +138,7 @@ namespace Blackjack
             }
         }
         //총 52장의 카드를 섞어 순서를 바꿔 줄 수 있는 함수
-        public void shuffle()
+        public void Shuffle()
         {
             Random rnd = new Random(); //빌트인 클래스
             for (int i = all_card.Length - 1; i >= 0; i--)
@@ -153,17 +150,9 @@ namespace Blackjack
             }
         }
 
-        //셔플 후 첫번째 카드부터 차례대로 딜러가 분배해주기 위한 카드 순서 deal변수
-        public int deal = 0;
-
-        //deal번째 순서의 카드를 딜러가 나눠주도록 하기 위해 해당 순서의 카드를 반환해주는 함수
-        public Card dealing(int deal)
-        {
-            return all_card[deal];
-        }
 
         //플레이어의 소지금 내에서 배팅 할 수 있도록 해주는 함수, 배팅 금액을 반환해준다.
-        static public int betting(Player player)
+        static public int Betting(Player player)
         {
             int bet = 0;
             bool isValidBet = false;
@@ -193,7 +182,7 @@ namespace Blackjack
 
 
         //딜러가 분배한 카드의 정보를 출력하여 볼 수 있게 해주는 함수
-        static public void Show_Card(Player[] players)
+        static public void ShowCard(Player[] players)
         {
             Console.WriteLine("----딜러의 카드----");
             int num_card1 = players[0].player_cards.Length;
@@ -253,7 +242,7 @@ namespace Blackjack
         /*처음 2장의 카드를 받은 이후 더블다운을 결정하면 1장만 힛으로
         더 받기로 하고 배팅을 2배로 한번 더 배팅할 수 있다.
         더블다운을 할 지 여부를 판단해줄 수 있는 함수*/
-        static public int Doubledown(Player player)
+        static public int DoubleDown(Player player)
         {
             Console.WriteLine("----더블다운을 하시겠습니까?----");
             Console.WriteLine("----Yes or No로 입력해주세요.----");
@@ -355,7 +344,7 @@ namespace Blackjack
 
     /*첫 두장의 카드가 같을 경우 두 카드를 나눠서 게임하는 
      규칙인데 이 함수는 아직 할지말지 여부 미정*/
-    static public void split()
+    static public void Split()
         {
         }
 
@@ -424,7 +413,7 @@ namespace Blackjack
 
         //소지금이 바닥나 게임이 모두 끝나 새 게임을 할 수 있도록 초기화해주는 함수
         //소지금이 바닥난 경우는 여기가 아니라, 모든 user_money 계산 후에 0보다 작거나 같아지면 종료 확인을 해야할듯 ? 
-        static public void reset_game()
+        static public void ResetGame()
         {
             dealer_card = 0;
             player_score = 0;
@@ -447,7 +436,7 @@ namespace Blackjack
         }
 
         //게임을 진행해주는 함수
-        static public void game_start()
+        static public void GameStart()
         {
             /*
             ----------안에서 여러가지 함수 실행되며 게임 진행됨-----------
