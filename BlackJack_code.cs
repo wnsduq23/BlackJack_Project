@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
 //구상만 하였을 뿐 아직 함수 구현은 제대로 하지 않아
@@ -28,6 +29,7 @@ namespace Blackjack
             public int ace_cnt = 0;
             public int bet_cash = 0;
             public int card_cnt = 0;
+            public bool stay = false;
             public bool busted = false; // 플레이어가 버스트 되었는지 여부
             //플레이어가 현재 가지고 있는 카드 정보를 담은 배열 선언
             public Card[] player_cards = new Card[10];
@@ -37,6 +39,7 @@ namespace Blackjack
             {
                 player_cards[card_cnt++] = card;
                 UpdateScore();
+                Console.WriteLine("score: {0}", score);
             }
             // 현재 점수 확인 메소드
             public int UpdateScore()
@@ -96,18 +99,28 @@ namespace Blackjack
         {
             //배팅을 해야 하기 때문에 현재 소지금 cash
             public double cash;
-
             public User()
             {
                 score = 0;
                 cash = 1000;
             }
             //첫 두장의 카드를 보고 그 판을 포기할 지 여부를 파악해주는 함수
-            public void Surrender(Dealer dealer)
+            public bool Surrender(Dealer dealer)
             {
-                if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
+                string command;
+                Console.WriteLine("Do you want to surrender?");
+                command = Console.ReadLine();
+                if (command == "YES")
                 {
-                    this.cash += Betting(this) / 2;
+                    if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
+                    {
+                        this.cash += Betting(this) / 2;
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
 
@@ -115,16 +128,31 @@ namespace Blackjack
         }
 
         //A카드,2~9, Q, J, K 각각 4장씩 총 52장의 카드가 있다.
-        Card[] all_card = new Card[52];
+        static Card[] all_card = new Card[52];
 
 
         //52장의 카드인 all_card 배열에 카드의 정보(해당 카드의 숫자, 모양)를 담아 주기 위한 함수
-        public void PushInformationCard(char Shape, int Number)
+        static public void PushInformationCard(char Shape, int Number)
         {
+            int Value;
+            if (Number == 1)
+            {
+                Value = 11;
+            }
+            else if (Number >= 10)
+            {
+                Value = 10;
+            }
+            else
+            {
+                Value = Number;
+            }
+
             Card card = new Card
             {
                 shape = Shape,
-                number = Number
+                number = Number,
+                value = Value
             };
 
             // 생성한 카드를 all_card 배열에 추가
@@ -138,7 +166,7 @@ namespace Blackjack
             }
         }
         //총 52장의 카드를 섞어 순서를 바꿔 줄 수 있는 함수
-        public void Shuffle()
+        static public void Shuffle()
         {
             Random rnd = new Random(); //빌트인 클래스
             for (int i = all_card.Length - 1; i >= 0; i--)
@@ -152,23 +180,23 @@ namespace Blackjack
 
 
         //플레이어의 소지금 내에서 배팅 할 수 있도록 해주는 함수, 배팅 금액을 반환해준다.
-        static public int Betting(Player player)
+        static public int Betting(User user)
         {
             int bet = 0;
             bool isValidBet = false;
             while (!isValidBet)
             {
-                Console.Write($"You have {player.cash} cash. Place your bet: ");
+                Console.Write($"You have {user.cash} cash. Place your bet: ");
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out bet)) // input이 정수형으로 변환될 수 있을때 bet에 값 넣기.
                 {
-                    if (bet > 0 && bet <= player.cash)
+                    if (bet > 0 && bet <= user.cash)
                     {
                         isValidBet = true;
                     }
                     else
                     {
-                        Console.WriteLine($"Invalid bet amount. Bet must be between 1 and {player.cash}.");
+                        Console.WriteLine($"Invalid bet amount. Bet must be between 1 and {user.cash}.");
                     }
                 }
                 else
@@ -176,7 +204,7 @@ namespace Blackjack
                     Console.WriteLine("Invalid input. Bet must be a positive integer.");
                 }
             }
-            player.cash -= bet;
+            user.cash -= bet;
             return bet;
         }
 
@@ -209,52 +237,39 @@ namespace Blackjack
         }
 
 
-        static public void Hit(Player player, Card[] all_card)
-        {
-            int num_cards = player.player_cards.Length;
-            player.player_cards[num_cards] = all_card[deal];
-        }
 
 
         //플레이어가 이후 힛을 할지, 스테이를 할지 결정해주는 함수
-        static public int HitOrSstay(Player player)
+        static public int HitOrStay(Player player, int dealing)
         {
             Console.WriteLine("----Hit 또는 Stay를 입력하여 결정해주세요.----");
             string hit_or_stay = Console.ReadLine();
             if (hit_or_stay == "Hit")
             {
-                Hit(player, all_card);
-                return 1;
+                player.GetCard(all_card[dealing++]);
             }
             else if (hit_or_stay == "Stay")
             {
-                return 0;
+                player.stay = true;
             }
-            else
-            {
-                Console.WriteLine("----잘못된 명령어가 입력되었습니다.----");
-                Console.WriteLine("----다시 입력해주세요.----");
-                return -1;
-            }
+            return dealing;
         }
 
 
         /*처음 2장의 카드를 받은 이후 더블다운을 결정하면 1장만 힛으로
         더 받기로 하고 배팅을 2배로 한번 더 배팅할 수 있다.
         더블다운을 할 지 여부를 판단해줄 수 있는 함수*/
-        static public int DoubleDown(Player player)
+        static public int DoubleDown(User user, int dealing)
         {
             Console.WriteLine("----더블다운을 하시겠습니까?----");
             Console.WriteLine("----Yes or No로 입력해주세요.----");
             string double_down = Console.ReadLine();
             if (double_down == "Yes")
             {
-                Hit(player, all_card);
-                Betting(player);
-                return 1;
+                user.GetCard(all_card[dealing++]);
+                Betting(user);
             }
-            else
-                return 0;
+            return dealing;
         }
         //블랙잭이 나왔는지 여부를 확인하는 함수
         static public bool BlackJack(Player player)
@@ -295,7 +310,8 @@ namespace Blackjack
                 else if (dealer.score < user.score)
                 {
                     Console.WriteLine("User Win");
-                    user.cash += Betting(user) * 2.0;    //유저 승리 배팅금액의 두배를 돌려받는다.
+                    user.cash += user.bet_cash * 2.0;    //유저 승리 배팅금액의 두배를 돌려받는다.
+                    Console.WriteLine("user get {0}", user.bet_cash * 2.0);
                 }
                 else
                 {
@@ -318,6 +334,7 @@ namespace Blackjack
                 user.busted = false;
                 dealer.ace_cnt = 0;
                 user.ace_cnt = 0;
+                user.stay = false;
                 Shuffle();
             }
             else             //유저가 돈이 없다면 resetgame
@@ -340,11 +357,11 @@ namespace Blackjack
             player.busted = true;  //해당 플레이어의 상태 busted -> 게임종료 시키고 newGame호출 필요함.
         }
 
-    
 
-    /*첫 두장의 카드가 같을 경우 두 카드를 나눠서 게임하는 
-     규칙인데 이 함수는 아직 할지말지 여부 미정*/
-    static public void Split()
+
+        /*첫 두장의 카드가 같을 경우 두 카드를 나눠서 게임하는 
+         규칙인데 이 함수는 아직 할지말지 여부 미정*/
+        static public void Split()
         {
         }
 
@@ -444,12 +461,68 @@ namespace Blackjack
             카드 셔플 진행 -> 배팅 진행 -> 페어 배팅 여부 확인 -> 플레이어1과 딜러 카드 2장씩 부여받음 -> 서렌더 여부 판단 -> 인슈어런스 여부 판단 -> 
             더블다운 여부 확인 -> hit or stay 여부 확인 -> 등 등 계속 게임 진행 -> 21이 넘지 않고 게임 마무리될경우 result_game으로 결과 확인
              */
+            int dealing;
+            bool surrender;
+            string command;
+            char[] shape = { 's', 'c', 'h', 'd' };
+            User user = new User();
+            Dealer dealer = new Dealer();
+
+            for (int i = 0; i < 4; i++)           //카드 정보입력
+            {
+                for (int j = 0; j < 13; j++)
+                {
+                    PushInformationCard(shape[i], j + 1);
+                }
+            }
+            while (user.cash > 0)        // 유저 잔고가 0이상일 경우 계속 게임을 할 수 있다.
+            {
+                dealing = 0;  //나눠줄 올카드 인덱스
+                Shuffle();  //카드를 섞는다. 
+                user.bet_cash = Betting(user);       //배팅
+
+                PairBetting();  //AskForFairBetting 구현 필요
+
+                dealer.GetCard(all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
+                dealer.GetCard(all_card[dealing++]);
+                user.GetCard(all_card[dealing++]);
+                user.GetCard(all_card[dealing++]);
+
+
+                surrender = user.Surrender(dealer);            //서렌더, 더블다운, 인슈어런스 여부 판단
+                if (surrender)
+                {
+                    NewGame(dealer, user);
+                }
+                dealing = DoubleDown(user, dealing);
+                Insuarance();
+
+                while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
+                {
+                    dealing = HitOrStay(user, dealing);
+                }
+
+                if (user.busted)            //유저가 버스트 되었다면 게임 종료
+                {
+                    ResultGame(dealer, user);
+                    continue;
+                }
+
+                while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
+                {
+                    dealer.GetCard(all_card[dealing++]);
+                }
+
+                ResultGame(dealer, user);  //게임 결과
+
+
+            }
+
         }
         //메인함수에서 game_start 진행
         static void Main(string[] args)
         {
-            reset_game();
-            game_start();
+            GameStart();
         }
     }
 }
