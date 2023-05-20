@@ -38,8 +38,12 @@ namespace Blackjack
             public virtual void GetCard(Card card)
             {
                 player_cards[card_cnt++] = card;
+                if (card.value == 11)
+                {
+                    ace_cnt++;
+                }
                 UpdateScore();
-                Console.WriteLine("score: {0}", score);
+                Console.WriteLine("card_info:{0} {1} {2} score: {3}", card.number, card.shape, card.value, score);
             }
             // 현재 점수 확인 메소드
             public int UpdateScore()
@@ -48,20 +52,17 @@ namespace Blackjack
                 score = 0;
                 for (int i = 0; i < card_cnt; i++)
                 {
-                    //현재 가지고 있는 에이스 개수 체크
-                    if (player_cards[i].value == 11)
-                    {
-                        ace_cnt++;
-                    }
                     score += player_cards[i].value;
                 }
                 //합이 21을 넘어간다면
                 if (score > 21)
                 {
+                    int j = ace_cnt;
                     //합이 21보다 작아질때까지 a들의 밸류를 1로 바꿈
-                    for (int i = 0; i < ace_cnt; i++)
+                    for (int i = 0; i < j; i++)
                     {
                         score -= 10;
+                        ace_cnt--;
                         if (score < 21)
                         {
                             break;
@@ -115,7 +116,7 @@ namespace Blackjack
                 {
                     if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
                     {
-                        this.cash += Betting(this) / 2;
+                        this.cash += bet_cash / 2;
                     }
                     return true;
                 }
@@ -265,7 +266,7 @@ namespace Blackjack
             Console.WriteLine("----더블다운을 하시겠습니까?----");
             Console.WriteLine("----Yes or No로 입력해주세요.----");
             string double_down = Console.ReadLine();
-            if (double_down == "Yes")
+            if (double_down == "YES")
             {
                 user.GetCard(all_card[dealing++]);
                 Betting(user);
@@ -275,7 +276,7 @@ namespace Blackjack
         //블랙잭이 나왔는지 여부를 확인하는 함수
         static public bool BlackJack(Player player)
         {
-            if (player.UpdateScore() == 21 && player.card_cnt == 2)  //카드를 두장 가지고 있고 합이 21이면 블랙잭
+            if (player.score == 21 && player.card_cnt == 2)  //카드를 두장 가지고 있고 합이 21이면 블랙잭
             {
                 return true;
             }
@@ -295,11 +296,16 @@ namespace Blackjack
             else if (BlackJack(user))
             {
                 Console.WriteLine("User Win");
-                user.cash += Betting(user) * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
+                user.cash += user.bet_cash * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
             }
             else if (BlackJack(dealer))
             {
                 Console.WriteLine("Dealer Win");
+            }
+            else if (dealer.busted)
+            {
+                Console.WriteLine("Dealer Busted");
+                user.cash += user.bet_cash * 2.0;
             }
             //busted 확인해야함
             else
@@ -504,6 +510,7 @@ namespace Blackjack
                 if (surrender)
                 {
                     NewGame(dealer, user);
+                    continue;
                 }
                 dealing = DoubleDown(user, dealing);
                 Insuarance(dealer, user);
@@ -515,7 +522,7 @@ namespace Blackjack
 
                 if (user.busted)            //유저가 버스트 되었다면 게임 종료
                 {
-                    ResultGame(dealer, user);
+                    NewGame(dealer, user);
                     continue;
                 }
 
