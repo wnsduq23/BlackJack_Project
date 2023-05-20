@@ -57,13 +57,11 @@ namespace Blackjack
                 //합이 21을 넘어간다면
                 if (score > 21)
                 {
-                    int j = ace_cnt;
                     //합이 21보다 작아질때까지 a들의 밸류를 1로 바꿈
-                    for (int i = 0; i < j; i++)
+                    for (int i = 0; i < ace_cnt; i++)
                     {
                         score -= 10;
-                        ace_cnt--;
-                        if (score < 21)
+                        if (score <= 21)
                         {
                             break;
                         }
