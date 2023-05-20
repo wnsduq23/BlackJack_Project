@@ -99,6 +99,8 @@ namespace Blackjack
             //배팅을 해야 하기 때문에 현재 소지금 cash
             public double cash;
             public int pair_bet;
+            public int insurance_bet;
+
             public User()
             {
                 score = 0;
@@ -108,9 +110,9 @@ namespace Blackjack
             public bool Surrender(Dealer dealer)
             {
                 string command;
-                Console.WriteLine("Do you want to surrender?");
+                Console.WriteLine("Do you want to surrender? : (Y/N)");
                 command = Console.ReadLine();
-                if (command == "YES")
+                if (command == "Y")
                 {
                     if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
                     {
@@ -375,27 +377,37 @@ namespace Blackjack
         //페어 배팅을 했다면 0이 아닌 값, 안했다면 0
         static public int PairBetting(User user)
         {
-            Console.WriteLine("You have a pair! You can make a pair bet up to your original bet.");
-            int pair_bet = AskForPairBetting();
+            int pair_bet = AskForPairBetting(user);
 
             //pair betting을 하였다면
-            if (pair_bet > 0 && pair_bet <= user.cash)
+            if (pair_bet > 0)
             {
                 Console.WriteLine("You bet {0} on your pair.", pair_bet);
             }
             return (pair_bet);
         }
         //이 돈을 받는 시점이 두 번째 카드가 공개된 시점이여서 확인과정 함수를 따로 나눔
-        //TODO: GameStart 함수에서 어딘가에 넣어줘야 함 
         static public void CheckPairBetting(User user)
         {
-            // 베팅한 금액의 11배를 받는다. 
-            if (user.player_cards[0].value == user.player_cards[1].value)
-                user.cash += user.pair_bet * 11;
+            //perfect pair 15배
+            if ((user.player_cards[0].number == user.player_cards[1].number) && (user.player_cards[0].shape == user.player_cards[1].shape))
+            {
+                user.cash += user.pair_bet * 15;
+                Console.WriteLine("it's perfect pair!! Congratulation!, Your cash : {0}", user.cash);
+            }
+            //color pair & mix pair 10배
+            else if ((user.player_cards[0].number == user.player_cards[1].number))
+            {
+                user.cash += user.pair_bet * 10;
+                Console.WriteLine("it's pair!! Congratulation!, Your cash : {0}", user.cash);
+            }
+            //none pair
             else
-                user.cash -= user.pair_bet;
+            {
+                Console.WriteLine("It's not pair... you lose bet cash, Your Remaning cash : {0}", user.cash);
+            }
         }
-        static private int AskForPairBetting()
+        static private int AskForPairBetting(User user)
         {
             int pair_bet = 0;
 
@@ -403,9 +415,7 @@ namespace Blackjack
             string answer = Console.ReadLine();
             if (answer == "Y")
             {
-                Console.WriteLine("How much do you want to bet? : ");
-                string a = Console.ReadLine();
-                pair_bet = int.Parse(a);
+                pair_bet = Betting(user);
             }
             else if (answer == "N")
             {
@@ -417,45 +427,52 @@ namespace Blackjack
 
         //상대가 블랙잭이 나올걸 대비해 베팅금액의 절반까지 인슈어런스로 지불할 수 있다.
         //인슈어런스 여부 확인 함수
-        static public void Insuarance(Dealer dealer, User user)
+        static public int Insuarance(Dealer dealer, User user)
         {
+            int insurance_betting = 0;
+
             //딜러의 업카드가 Ace일 때 유저에게 묻는다.
             if (dealer.player_cards[0].value == 11)//이거 처음 받는 카드니까 ace를 11로 생각했을꺼고.. 그래서 11 값이랑 비교
             {
                 if (AskForInsurance())
                 {
                     Console.WriteLine("You bought insurance.");
-                    //인슈어런스에 얼마를 베팅할지 (찾아보니 절반까지 배팅할 수 있는 듯?)
-                    int a = PlayerBettingToInsurance();
-                    //만약 딜러가 블랙잭이 맞았다면 
-                    if (dealer.score == 10)
-                    {
-                        Console.WriteLine("Dealer has blackjack. Insurance pays 2 to 1.");
-                        user.cash += a * 2;
-                        user.bet_cash = 0;
-                    }
-                    // 블랙잭이 아니였다면 
-                    else
-                    {
-                        Console.WriteLine("Dealer does not have blackjack. You lose your insurance bet.");
-                        user.cash -= a;
-                        //플레이어가 블랙잭이였다면 
-                        if (user.score == 21)
-                            user.cash += user.bet_cash * 1.5;
-
-                    }
+                    //인슈어런스에 얼마를 베팅할지
+                    insurance_betting = Betting(user);
+                }
+                //insurance_betting을 하였다면
+                if (insurance_betting > 0)
+                {
+                    Console.WriteLine("You bet {0} on dealer's blackjack insurance.", insurance_betting);
                 }
             }
+            return (insurance_betting);
         }
-        static private int PlayerBettingToInsurance()
+        static public void CheckInsuranceBetting(Dealer dealer, User user)
         {
-            Console.WriteLine("How much do you want to bet on insurance? :");
-            string a = Console.ReadLine();
-            return (int.Parse(a));
+
+            //만약 딜러가 블랙잭이 맞았다면 
+            if (BlackJack(dealer))
+            {
+                user.cash += user.insurance_bet * 2;
+                user.bet_cash = 0;
+                Console.WriteLine("Dealer has blackjack! Insurance pays 2 to 1. Your cash : {0}", user.cash);
+            }
+            // 블랙잭이 아니였다면 
+            else
+            {
+                Console.WriteLine("Dealer does not have blackjack. You lose your insurance bet. Your Remaing cash : {0}", user.cash);
+                user.cash -= user.insurance_bet;
+                //플레이어가 블랙잭이였다면 
+                if (user.score == 21)
+                    user.cash += user.bet_cash * 1.5;
+
+            }
         }
+
         static private bool AskForInsurance()
         {
-            Console.WriteLine("Do you want to insurance? : (Y/N)");
+            Console.WriteLine("dealer's first card is ACE. Do you want to insurance? : (Y/N)");
             string answer = Console.ReadLine();
             if (answer == "Y")
                 return (true);
@@ -497,11 +514,18 @@ namespace Blackjack
 
                 user.pair_bet = PairBetting(user);
 
-
                 dealer.GetCard(all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
+                //딜러의 카드가 ace일때 insurance 할지
+                Insuarance(dealer, user);
+
                 dealer.GetCard(all_card[dealing++]);
                 user.GetCard(all_card[dealing++]);
                 user.GetCard(all_card[dealing++]);
+
+                if (user.insurance_bet > 0)
+                    CheckInsuranceBetting(dealer, user);
+                if (user.pair_bet > 0)
+                    CheckPairBetting(user);
 
 
                 surrender = user.Surrender(dealer);            //서렌더, 더블다운, 인슈어런스 여부 판단
@@ -511,7 +535,6 @@ namespace Blackjack
                     continue;
                 }
                 dealing = DoubleDown(user, dealing);
-                Insuarance(dealer, user);
 
                 while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
                 {
