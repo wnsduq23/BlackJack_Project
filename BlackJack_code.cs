@@ -99,6 +99,7 @@ namespace Blackjack
         {
             //배팅을 해야 하기 때문에 현재 소지금 cash
             public double cash;
+            public int pair_bet;
             public User()
             {
                 score = 0;
@@ -337,9 +338,9 @@ namespace Blackjack
                 user.stay = false;
                 Shuffle();
             }
-            else             //유저가 돈이 없다면 resetgame
+            else             //유저가 돈이 없다면 finish the game
             {
-                ResetGame();
+                Environment.Exit(0);
             }
         }
         //스코어가 21이 넘어 버스트 패배하고 새 게임을 시작한다.
@@ -367,89 +368,97 @@ namespace Blackjack
 
         //최초 받는 2장의 카드가 같은 가치를 갖는 카드일 거라 예상한다면 미리 페어 배팅 가능
         //페어 배팅할지 여부를 확인해주는 함수
-        static public void PairBetting()
+        //페어 배팅을 했다면 0이 아닌 값, 안했다면 0
+        static public int PairBetting(User user)
         {
             Console.WriteLine("You have a pair! You can make a pair bet up to your original bet.");
-            int pair_bet = AskForPairBet();
+            int pair_bet = AskForPairBetting();
+
             //pair betting을 하였다면
-            if (pair_bet > 0 && pair_bet <= player_bet)
+            if (pair_bet > 0 && pair_bet <= user.cash)
             {
-                Console.WriteLine("You bet {0} on your pair.", pairBet);
+                Console.WriteLine("You bet {0} on your pair.", pair_bet);
             }
+            return (pair_bet);
         }
         //이 돈을 받는 시점이 두 번째 카드가 공개된 시점이여서 확인과정 함수를 따로 나눔
-        static public void CheckPairBetting()
+        //TODO: GameStart 함수에서 어딘가에 넣어줘야 함 
+        static public void CheckPairBetting(User user)
         {
             // 베팅한 금액의 11배를 받는다. 
-            if (player_card1 == player_card2)
-                player_money += pair_bet * 11;
+            if (user.player_cards[0].value == user.player_cards[1].value)
+                user.cash += user.pair_bet * 11;
             else
-                player_money -= pair_bet;
+                user.cash -= user.pair_bet;
+        }
+        static private int AskForPairBetting()
+        {
+            int pair_bet = 0;
+
+            Console.WriteLine("Do you want to do pair betting ? : (Y/N)");
+            string answer = Console.ReadLine();
+            if (answer == "Y")
+            {
+                Console.WriteLine("How much do you want to bet? : ");
+                string a = Console.ReadLine();
+                pair_bet = int.Parse(a);
+            }
+            else if (answer == "N")
+            {
+                pair_bet = 0;
+            }
+
+            return (pair_bet);
         }
 
         //상대가 블랙잭이 나올걸 대비해 베팅금액의 절반까지 인슈어런스로 지불할 수 있다.
         //인슈어런스 여부 확인 함수
-        private bool dealer_has_ace;
-        static public void Insuarance()
+        static public void Insuarance(Dealer dealer, User user)
         {
             //딜러의 업카드가 Ace일 때 유저에게 묻는다.
-            if (dealer_has_ace)
+            if (dealer.player_cards[0].value == 11)//이거 처음 받는 카드니까 ace를 11로 생각했을꺼고.. 그래서 11 값이랑 비교
             {
-                if (AsKForInsurance())
+                if (AskForInsurance())
                 {
-                    Conosole.WriteLine("You bought insurance.");
+                    Console.WriteLine("You bought insurance.");
                     //인슈어런스에 얼마를 베팅할지 (찾아보니 절반까지 배팅할 수 있는 듯?)
                     int a = PlayerBettingToInsurance();
                     //만약 딜러가 블랙잭이 맞았다면 
-                    if (dealer_score == 10)
+                    if (dealer.score == 10)
                     {
                         Console.WriteLine("Dealer has blackjack. Insurance pays 2 to 1.");
-                        player_money += a * 2;
-                        player_betting_money = 0;
+                        user.cash += a * 2;
+                        user.bet_cash = 0;
                     }
                     // 블랙잭이 아니였다면 
                     else
                     {
                         Console.WriteLine("Dealer does not have blackjack. You lose your insurance bet.");
-                        player_money -= a;
+                        user.cash -= a;
                         //플레이어가 블랙잭이였다면 
-                        if (player_score == 21)
-                            player_money += player_betting_money * 1.5;
+                        if (user.score == 21)
+                            user.cash += user.bet_cash * 1.5;
 
                     }
                 }
             }
         }
-        private int PlayerBettingToInsurance()
+        static private int PlayerBettingToInsurance()
         {
-            Console.WriteLine("How much do you want to bet on insurance?");
+            Console.WriteLine("How much do you want to bet on insurance? :");
             string a = Console.ReadLine();
             return (int.Parse(a));
         }
-
-
-        //소지금이 바닥나 게임이 모두 끝나 새 게임을 할 수 있도록 초기화해주는 함수
-        //소지금이 바닥난 경우는 여기가 아니라, 모든 user_money 계산 후에 0보다 작거나 같아지면 종료 확인을 해야할듯 ? 
-        static public void ResetGame()
+        static private bool AskForInsurance()
         {
-            dealer_card = 0;
-            player_score = 0;
-            dealer_score = 0;
-            dealer_has_ace = false;
-
-            // 딜러랑 플레이어에게 카드 주기 
-            int player_card1 = GetRandomCard();
-            int player_card2 = GetRandomCard();
-            int dealer_card1 = GetRandomCard();
-            dealer_card = dealer_card1; // remember dealer's first card
-
-            player_score = player_card1 + player_card2;
-            dealer_score = dealer_card1;
-            dealer_has_ace = (dealer_card1 == 1);
-
-            //어떤 값 들어왔는 지 확인. 후에 딜러 카드 확인은 유저가 못하게 해야할 듯 
-            Console.WriteLine("Your cards: {0} and {1} (total = {2})", player_card1, player_card2, player_score);
-            Console.WriteLine("Dealer's card: {0}", dealer_card1);
+            Console.WriteLine("Do you want to insurance? : (Y/N)");
+            string answer = Console.ReadLine();
+            if (answer == "Y")
+                return (true);
+            else if (answer == "N")
+                return (false);
+            else
+                return (false);
         }
 
         //게임을 진행해주는 함수
@@ -462,6 +471,7 @@ namespace Blackjack
             더블다운 여부 확인 -> hit or stay 여부 확인 -> 등 등 계속 게임 진행 -> 21이 넘지 않고 게임 마무리될경우 result_game으로 결과 확인
              */
             int dealing;
+            int pair_bet;
             bool surrender;
             string command;
             char[] shape = { 's', 'c', 'h', 'd' };
@@ -481,7 +491,8 @@ namespace Blackjack
                 Shuffle();  //카드를 섞는다. 
                 user.bet_cash = Betting(user);       //배팅
 
-                PairBetting();  //AskForFairBetting 구현 필요
+                user.pair_bet = PairBetting(user);
+
 
                 dealer.GetCard(all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
                 dealer.GetCard(all_card[dealing++]);
@@ -495,7 +506,7 @@ namespace Blackjack
                     NewGame(dealer, user);
                 }
                 dealing = DoubleDown(user, dealing);
-                Insuarance();
+                Insuarance(dealer, user);
 
                 while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
                 {
