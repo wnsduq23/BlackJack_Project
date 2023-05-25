@@ -515,6 +515,7 @@ namespace Blackjack
                 user.pair_bet = PairBetting(user);
 
                 dealer.GetCard(all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
+                // dealer가 ace카드 일 때의 예시 넣기
                 //딜러의 카드가 ace일때 insurance 할지
                 Insuarance(dealer, user);
 
