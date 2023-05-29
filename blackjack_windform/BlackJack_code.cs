@@ -108,22 +108,11 @@ namespace Blackjack
                 cash = 1000;
             }
             //첫 두장의 카드를 보고 그 판을 포기할 지 여부를 파악해주는 함수
-            public bool Surrender(Dealer dealer)
+            public void Surrender(Dealer dealer)
             {
-                string command;
-                Console.WriteLine("Do you want to surrender? : (Y/N)");
-                command = Console.ReadLine();
-                if (command == "Y")
+                if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
                 {
-                    if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
-                    {
-                        this.cash += bet_cash / 2;
-                    }
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    this.cash += bet_cash / 2;
                 }
             }
 
@@ -267,27 +256,32 @@ namespace Blackjack
         }
 
         //게임 결과로 누가 승리하였는지 확인해주는 함수
-        static public void ResultGame(Dealer dealer, User user)
+        static public string ResultGame(Dealer dealer, User user)
         {
+            string result;
             Console.WriteLine("{0} {1}", dealer.score, user.score);
             if (BlackJack(dealer) && BlackJack(user))  //딜러와 유저 둘다 블랙잭
             {
                 //push(무승부) 배팅금액을 돌려받는다.
                 Console.WriteLine("Draw");
+                result = "Draw";
                 user.cash += user.bet_cash;
             }
             else if (BlackJack(user))
             {
                 Console.WriteLine("User Win");
+                result = "User Win";
                 user.cash += user.bet_cash * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
             }
             else if (BlackJack(dealer))
             {
                 Console.WriteLine("Dealer Win");
+                result = "Dealer Win";
             }
             else if (dealer.busted)
             {
                 Console.WriteLine("Dealer Busted");
+                result = "User Win";
                 user.cash += user.bet_cash * 2.0;
             }
             //busted 확인해야함
@@ -296,10 +290,14 @@ namespace Blackjack
                 if (dealer.score > user.score)
                 {
                     Console.WriteLine("Dealer Win");
+                    result = "Dealer Win";
                 }
                 else if (dealer.score < user.score)
                 {
                     Console.WriteLine("User Win");
+                    result = "User Win";
+                    result += "\nUser get ";
+                    result += (user.bet_cash*2.0).ToString();
                     user.cash += user.bet_cash * 2.0;    //유저 승리 배팅금액의 두배를 돌려받는다.
                     Console.WriteLine("user get {0}", user.bet_cash * 2.0);
                 }
@@ -307,10 +305,11 @@ namespace Blackjack
                 {
                     //push(무승부) 배팅금액을 돌려받는다.
                     Console.WriteLine("Draw");
+                    result = "Draw";
                     user.cash += user.bet_cash;
                 }
             }
-            NewGame(dealer, user);
+            return result;
         }
         // 게임 한판이 끝난 뒤 배팅금액, 플레이어,딜러 카드덱을 비우고 전체카드덱 셔플
         static public void NewGame(Dealer dealer, User user)
@@ -466,18 +465,17 @@ namespace Blackjack
         }
 
         //게임을 진행해주는 함수
-        static public void GameStart()
+        /*static public void GameStart()
         {
-            /*
+            *//*
             ----------안에서 여러가지 함수 실행되며 게임 진행됨-----------
             -대략적인 진행상황(카드를 받을 때마다 카드의 정보를 show_card를 통해 보여줌, score계산으로 21이 넘는지 계속 확인)-
             카드 셔플 진행 -> 배팅 진행 -> 페어 배팅 여부 확인 -> 플레이어1과 딜러 카드 2장씩 부여받음 -> 서렌더 여부 판단 -> 인슈어런스 여부 판단 -> 
             더블다운 여부 확인 -> hit or stay 여부 확인 -> 등 등 계속 게임 진행 -> 21이 넘지 않고 게임 마무리될경우 result_game으로 결과 확인
-             */
+             *//*
             int dealing;
             int pair_bet;
             bool surrender;
-            string command;
             char[] shape = { 's', 'c', 'h', 'd' };
             User user = new User();
             Dealer dealer = new Dealer();
@@ -539,9 +537,9 @@ namespace Blackjack
                 ResultGame(dealer, user);  //게임 결과
 
 
-            }
-
-        }
+            }*/
+/*
+        }*/
         //메인함수에서 game_start 진행
     }
 }

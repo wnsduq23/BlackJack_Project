@@ -370,6 +370,7 @@
             Name = "GamePage";
             Text = "GamePage";
             Load += GamePage_Load;
+            Shown += GamePage_Shown;
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
