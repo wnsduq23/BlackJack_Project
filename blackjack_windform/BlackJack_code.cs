@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
+using blackjack_windform;
 
 //구상만 하였을 뿐 아직 함수 구현은 제대로 하지 않아
 //코드 선언 내용이 아직 틀릴 수도 있음.
@@ -130,7 +131,7 @@ namespace Blackjack
         }
 
         //A카드,2~9, Q, J, K 각각 4장씩 총 52장의 카드가 있다.
-        static Card[] all_card = new Card[52];
+        public static Card[] all_card = new Card[52];
 
 
         //52장의 카드인 all_card 배열에 카드의 정보(해당 카드의 숫자, 모양)를 담아 주기 위한 함수
@@ -177,35 +178,17 @@ namespace Blackjack
                 Card temp = all_card[j];
                 all_card[j] = all_card[i];
                 all_card[i] = temp;
+                Image temp2 = blackjack_windform.StartPage.cardImage[j];
+                blackjack_windform.StartPage.cardImage[j] = blackjack_windform.StartPage.cardImage[i];
+                blackjack_windform.StartPage.cardImage[i] = temp2;
             }
         }
 
 
         //플레이어의 소지금 내에서 배팅 할 수 있도록 해주는 함수, 배팅 금액을 반환해준다.
-        static public int Betting(User user)
+        static public int Betting(User user, int bet)
         {
-            int bet = 0;
-            bool isValidBet = false;
-            while (!isValidBet)
-            {
-                Console.Write($"You have {user.cash} cash. Place your bet: ");
-                string input = Console.ReadLine();
-                if (int.TryParse(input, out bet)) // input이 정수형으로 변환될 수 있을때 bet에 값 넣기.
-                {
-                    if (bet > 0 && bet <= user.cash)
-                    {
-                        isValidBet = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid bet amount. Bet must be between 1 and {user.cash}.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Bet must be a positive integer.");
-                }
-            }
+            
             user.cash -= bet;
             return bet;
         }
@@ -269,7 +252,7 @@ namespace Blackjack
             if (double_down == "YES")
             {
                 user.GetCard(all_card[dealing++]);
-                Betting(user);
+                Betting(user, 1);
             }
             return dealing;
         }
@@ -415,7 +398,7 @@ namespace Blackjack
             string answer = Console.ReadLine();
             if (answer == "Y")
             {
-                pair_bet = Betting(user);
+                pair_bet = Betting(user, 1);
             }
             else if (answer == "N")
             {
@@ -438,7 +421,7 @@ namespace Blackjack
                 {
                     Console.WriteLine("You bought insurance.");
                     //인슈어런스에 얼마를 베팅할지
-                    insurance_betting = Betting(user);
+                    insurance_betting = Betting(user, 1);
                 }
                 //insurance_betting을 하였다면
                 if (insurance_betting > 0)
@@ -510,7 +493,7 @@ namespace Blackjack
             {
                 dealing = 0;  //나눠줄 올카드 인덱스
                 Shuffle();  //카드를 섞는다. 
-                user.bet_cash = Betting(user);       //배팅
+                user.bet_cash = Betting(user,1);       //배팅
 
                 user.pair_bet = PairBetting(user);
 
@@ -560,9 +543,5 @@ namespace Blackjack
 
         }
         //메인함수에서 game_start 진행
-        static void Main(string[] args)
-        {
-            GameStart();
-        }
     }
 }
