@@ -17,3 +17,22 @@ C:\Users\박준형\source\repos\blackjack_windform\blackjack_windform\obj\Debug\
 C:\Users\박준형\source\repos\blackjack_windform\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.pdb
 C:\Users\박준형\source\repos\blackjack_windform\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.genruntimeconfig.cache
 C:\Users\박준형\source\repos\blackjack_windform\blackjack_windform\obj\Debug\net7.0-windows\ref\blackjack_windform.dll
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.csproj.AssemblyReference.cache
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.GamePage.resources
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.Properties.Resources.resources
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.StartPage.resources
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.csproj.GenerateResource.cache
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.AssemblyInfoInputs.cache
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.AssemblyInfo.cs
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.csproj.CoreCompileInputs.cache
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.dll
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\refint\blackjack_windform.dll
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.pdb
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\bin\Debug\net7.0-windows\blackjack_windform.exe
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\bin\Debug\net7.0-windows\blackjack_windform.deps.json
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\bin\Debug\net7.0-windows\blackjack_windform.runtimeconfig.json
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\bin\Debug\net7.0-windows\blackjack_windform.dll
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\bin\Debug\net7.0-windows\blackjack_windform.pdb
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.genruntimeconfig.cache
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\ref\blackjack_windform.dll
