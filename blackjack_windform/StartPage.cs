@@ -70,7 +70,7 @@ namespace blackjack_windform
             int cardsPerRow = spriteSheetWidth / cardWidth; //13
             int cardsPerColumn = spriteSheetHeight / cardHeight; //5
 
-            
+
             cardImage = new Image[cardsPerColumn * cardsPerRow];
 
 
@@ -104,7 +104,7 @@ namespace blackjack_windform
             // Form¿¡ PictureBox Ãß°¡
             this.Controls.Add(pictureBox);
 
-            
+
 
         }
 

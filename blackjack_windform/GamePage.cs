@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using BP = Blackjack.Program;
 
 namespace blackjack_windform
@@ -77,7 +76,6 @@ namespace blackjack_windform
             bet_amount = 50;
 
             Blackjack.Program.Betting(user, bet_amount);
-
             MessageBox.Show(user.cash.ToString());
         }
 
@@ -108,15 +106,23 @@ namespace blackjack_windform
             result = BP.ResultGame(dealer, user);
             MessageBox.Show(result);
         }
-        static void clearImg()
+        public void clearImage()  //카드 이미지 clear 
         {
-
+            pictureBox1.Image = StartPage.cardImage[0];
+            pictureBox2.Image = StartPage.cardImage[1];
+            pictureBox3.Image = StartPage.cardImage[2];
+            pictureBox4.Image = StartPage.cardImage[3];
+            pictureBox5.Image = StartPage.cardImage[4];
+            pictureBox6.Image = null;
+            pictureBox7.Image = null;
+            pictureBox8.Image = null;
+            pictureBox9.Image = null;
+            pictureBox10.Image = null;
         }
-        static void NewGame(BP.Dealer dealer, BP.User user)
-        {
-            BP.NewGame(dealer, user);
-            clearImg();
-        }
+        /* static void NewGame(BP.Dealer dealer, BP.User user)
+         {
+             clearImg();
+         }*/
         static bool Surrender(BP.Dealer dealer, BP.User user)
         {
             DialogResult result;
@@ -125,6 +131,7 @@ namespace blackjack_windform
             if (result == DialogResult.OK)
             {
                 user.Surrender(dealer);
+
                 return true;
             }
             else
@@ -133,7 +140,7 @@ namespace blackjack_windform
             }
 
         }
-        static public void GameStart()
+        public void GameStart()
         {
             /*
             ----------안에서 여러가지 함수 실행되며 게임 진행됨-----------
@@ -159,8 +166,9 @@ namespace blackjack_windform
             {
                 dealing = 0;  //나눠줄 올카드 인덱스
                 BP.Shuffle();  //카드를 섞는다. 
+                textBox1.Text = user.cash.ToString();
                 user.bet_cash = BP.Betting(user, 1);       //배팅
-
+                textBox2.Text = user.bet_cash.ToString();
                 user.pair_bet = BP.PairBetting(user);
 
                 dealer.GetCard(BP.all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
@@ -182,6 +190,7 @@ namespace blackjack_windform
 
                 if (surrender)
                 {
+                    clearImage();
                     BP.NewGame(dealer, user);
                     continue;
                 }
@@ -194,6 +203,8 @@ namespace blackjack_windform
 
                 if (user.busted)            //유저가 버스트 되었다면 게임 종료
                 {
+                    showResult(dealer, user);
+                    clearImage();
                     BP.NewGame(dealer, user);
                     continue;
                 }
@@ -203,9 +214,8 @@ namespace blackjack_windform
                     dealer.GetCard(BP.all_card[dealing++]);
                 }
                 showResult(dealer, user); //게임 결과
-                NewGame(dealer, user);
-
-
+                clearImage();
+                BP.NewGame(dealer, user);
             }
 
         }
