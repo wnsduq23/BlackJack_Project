@@ -20,6 +20,11 @@ namespace blackjack_windform
         {
             InitializeComponent();
         }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+        }
+
         private void GamePage_Load(object sender, EventArgs e)
         {
         }
@@ -73,6 +78,7 @@ namespace blackjack_windform
             Blackjack.Program.Betting(user, bet_amount);
             MessageBox.Show(user.cash.ToString());
         }
+
         private void button5_Click(object sender, EventArgs e)
         {
             Blackjack.Program.User user = new Blackjack.Program.User();
@@ -102,18 +108,21 @@ namespace blackjack_windform
         }
         public void clearImage()  //카드 이미지 clear 
         {
-            PictureBox[] boxes =
-            {
-                pictureBox1, pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6,
-                pictureBox7,pictureBox8, pictureBox9, pictureBox10, pictureBox11, pictureBox12,
-                pictureBox13, pictureBox14, pictureBox15, pictureBox16, pictureBox17, pictureBox18,
-                pictureBox19, pictureBox20, pictureBox21, pictureBox22,pictureBox23,pictureBox24
-            };
-            foreach (PictureBox box in boxes)
-            {
-                box.Image = null;
-            }
+            pictureBox1.Image = StartPage.cardImage[0];
+            pictureBox2.Image = StartPage.cardImage[1];
+            pictureBox3.Image = StartPage.cardImage[2];
+            pictureBox4.Image = StartPage.cardImage[3];
+            pictureBox5.Image = StartPage.cardImage[4];
+            pictureBox6.Image = null;
+            pictureBox7.Image = null;
+            pictureBox8.Image = null;
+            pictureBox9.Image = null;
+            pictureBox10.Image = null;
         }
+        /* static void NewGame(BP.Dealer dealer, BP.User user)
+         {
+             clearImg();
+         }*/
         static bool Surrender(BP.Dealer dealer, BP.User user)
         {
             DialogResult result;
@@ -158,24 +167,24 @@ namespace blackjack_windform
                 dealing = 0;  //나눠줄 올카드 인덱스
                 BP.Shuffle();  //카드를 섞는다. 
                 textBox1.Text = user.cash.ToString();
-                //user.bet_cash = BP.Betting(user, 1);       //배팅
+                user.bet_cash = BP.Betting(user, 1);       //배팅
                 textBox2.Text = user.bet_cash.ToString();
-                // user.pair_bet = BP.PairBetting(user);
+                user.pair_bet = BP.PairBetting(user);
 
                 dealer.GetCard(BP.all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
-                                                                 // dealer가 ace카드 일 때의 예시 넣기
-                                                                 //딜러의 카드가 ace일때 insurance 할지
-                                                                 // BP.Insuarance(dealer, user);
+                // dealer가 ace카드 일 때의 예시 넣기
+                //딜러의 카드가 ace일때 insurance 할지
+                BP.Insuarance(dealer, user);
 
                 dealer.GetCard(BP.all_card[dealing++]);
                 user.GetCard(BP.all_card[dealing++]);
                 user.GetCard(BP.all_card[dealing++]);
 
-                /*  if (user.insurance_bet > 0)
-                      BP.CheckInsuranceBetting(dealer, user);
-                  if (user.pair_bet > 0)
-                      BP.CheckPairBetting(user);
-                */
+                if (user.insurance_bet > 0)
+                    BP.CheckInsuranceBetting(dealer, user);
+                if (user.pair_bet > 0)
+                    BP.CheckPairBetting(user);
+
 
                 surrender = Surrender(dealer, user);
 
@@ -185,12 +194,12 @@ namespace blackjack_windform
                     BP.NewGame(dealer, user);
                     continue;
                 }
-                // dealing = BP.DoubleDown(user, dealing);
+                dealing = BP.DoubleDown(user, dealing);
 
-                /* while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
-                 {
-                      //dealing = BP.HitOrStay(user, dealing);
-                 }*/
+                while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
+                {
+                    dealing = BP.HitOrStay(user, dealing);
+                }
 
                 if (user.busted)            //유저가 버스트 되었다면 게임 종료
                 {
