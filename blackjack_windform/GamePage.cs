@@ -15,6 +15,7 @@ namespace blackjack_windform
     public partial class GamePage : Form
     {
         public static int bet_amount = 0;
+
         public GamePage()
         {
             InitializeComponent();
@@ -37,7 +38,6 @@ namespace blackjack_windform
         private void button1_Click(object sender, EventArgs e)
         {
             Blackjack.Program.User user = new Blackjack.Program.User();
-
 
             bet_amount = 1;
 

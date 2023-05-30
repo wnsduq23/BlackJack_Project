@@ -16,6 +16,8 @@ namespace blackjack_windform
 {
     public partial class StartPage : Form
     {
+        
+        
         public StartPage()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace blackjack_windform
         }
 
         public static Image[] cardImage;
+        public static Image back_card;
         private void MainForm_Load(object sender, EventArgs e)
         {
             for (int i = 1; i <= 13; i++)
@@ -68,9 +71,9 @@ namespace blackjack_windform
 
 
             int cardsPerRow = spriteSheetWidth / cardWidth; //13
-            int cardsPerColumn = spriteSheetHeight / cardHeight; //5
+            int cardsPerColumn = spriteSheetHeight / cardHeight; //4 
 
-            
+
             cardImage = new Image[cardsPerColumn * cardsPerRow];
 
 
@@ -88,23 +91,32 @@ namespace blackjack_windform
                 }
             }
 
+            // back_card에 카드 뒷면 이미지 넣기
+
+            Rectangle cropRect2 = new Rectangle(2 * cardWidth, 4 * cardHeight, cardWidth, cardHeight);
+            Bitmap croppedImage2 = new Bitmap(cardWidth, cardHeight);
+            Graphics graphics2 = Graphics.FromImage(croppedImage2);
+            graphics2.DrawImage(spriteSheet, new Rectangle(0, 0, cardWidth, cardHeight), cropRect2, GraphicsUnit.Pixel);
+            back_card = croppedImage2;
+
+
             BP.Shuffle();
 
 
-            PictureBox pictureBox = new PictureBox();
+/*          PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Location = new Point(10, 10); // PictureBox의 위치 설정
             pictureBox.Size = new Size(cardWidth, cardHeight); // PictureBox의 크기 설정
 
             // 카드 이미지를 PictureBox에 표시
-            pictureBox.Image = cardImage[13];
+            pictureBox.Image = back_card;
             MessageBox.Show(BP.all_card[13].number.ToString());
             MessageBox.Show(BP.all_card[13].shape.ToString());
 
             // Form에 PictureBox 추가
-            this.Controls.Add(pictureBox);
+            this.Controls.Add(pictureBox);*/
 
-            
+
 
         }
 

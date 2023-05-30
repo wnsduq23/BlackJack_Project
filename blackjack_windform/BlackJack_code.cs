@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 using blackjack_windform;
 
+using bw = blackjack_windform;
+
+
 //구상만 하였을 뿐 아직 함수 구현은 제대로 하지 않아
 //코드 선언 내용이 아직 틀릴 수도 있음.
 namespace Blackjack
@@ -493,7 +496,7 @@ namespace Blackjack
             {
                 dealing = 0;  //나눠줄 올카드 인덱스
                 Shuffle();  //카드를 섞는다. 
-                user.bet_cash = Betting(user,1);       //배팅
+                user.bet_cash = Betting(user,bw.GamePage.bet_amount);       //배팅
 
                 user.pair_bet = PairBetting(user);
 
