@@ -16,8 +16,6 @@ namespace blackjack_windform
 {
     public partial class StartPage : Form
     {
-        
-        
         public StartPage()
         {
             InitializeComponent();
@@ -35,49 +33,29 @@ namespace blackjack_windform
 
         public static Image[] cardImage;
         public static Image back_card;
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            for (int i = 1; i <= 13; i++)
-            {
-                BP.PushInformationCard('c', i);
-            }
-            for (int i = 1; i <= 13; i++)
-            {
-                BP.PushInformationCard('d', i);
-            }
-            for (int i = 1; i <= 13; i++)
-            {
-                BP.PushInformationCard('h', i);
-            }
-            for (int i = 1; i <= 13; i++)
-            {
-                BP.PushInformationCard('s', i);
-            }
 
-            /*            for (int i = 0; i <= 51; i++)
-                        {
-                            MessageBox.Show(Blackjack.Program.all_card[i].number.ToString());
-                        }*/
-
-            Image bmp = new Bitmap(blackjack_windform.Properties.Resources.Ä«µåÀüÃ¼); //ÀÌ¹ÌÁö µ¥ÀÌÅÍ ÀúÀåÇÒ ¶§ ¾²´Â Å¬·¡½º
+            Image bmp = new Bitmap(blackjack_windform.Properties.Resources.ì¹´ë“œì „ì²´); //ì´ë¯¸ì§€ ë°ì´í„° ì €ìž¥í•  ë•Œ ì“°ëŠ” í´ëž˜ìŠ¤
 
             Image spriteSheet = bmp;
 
-            int cardWidth = 167; //Ä«µå 1°³ Æø
-            int cardHeight = 244; //Ä«µå 1°³ ³ôÀÌ
+            int cardWidth = 167; //ì¹´ë“œ 1ê°œ í­
+            int cardHeight = 244; //ì¹´ë“œ 1ê°œ ë†’ì´
 
-            int spriteSheetWidth = spriteSheet.Width; // ÀüÃ¼ Æø
-            int spriteSheetHeight = spriteSheet.Height; // ÀüÃ¼ ³ôÀÌ
+            int spriteSheetWidth = spriteSheet.Width; // ì „ì²´ í­
+            int spriteSheetHeight = spriteSheet.Height; // ì „ì²´ ë†’ì´
 
 
             int cardsPerRow = spriteSheetWidth / cardWidth; //13
-            int cardsPerColumn = spriteSheetHeight / cardHeight; //4 
+            int cardsPerColumn = spriteSheetHeight / cardHeight; //5
 
 
             cardImage = new Image[cardsPerColumn * cardsPerRow];
 
 
-            // °¢ Ä«µåÀÇ ÀÌ¹ÌÁö¸¦ ¹è¿­¿¡ ÀúÀå
+            // ê° ì¹´ë“œì˜ ì´ë¯¸ì§€ë¥¼ ë°°ì—´ì— ì €ìž¥
             for (int y = 0; y < cardsPerColumn; y++)
             {
                 for (int x = 0; x < cardsPerRow; x++)
@@ -91,7 +69,7 @@ namespace blackjack_windform
                 }
             }
 
-            // back_card¿¡ Ä«µå µÞ¸é ÀÌ¹ÌÁö ³Ö±â
+            // back_cardì— ì¹´ë“œ ë’·ë©´ ì´ë¯¸ì§€ ë„£ê¸°
 
             Rectangle cropRect2 = new Rectangle(2 * cardWidth, 4 * cardHeight, cardWidth, cardHeight);
             Bitmap croppedImage2 = new Bitmap(cardWidth, cardHeight);
@@ -99,21 +77,18 @@ namespace blackjack_windform
             graphics2.DrawImage(spriteSheet, new Rectangle(0, 0, cardWidth, cardHeight), cropRect2, GraphicsUnit.Pixel);
             back_card = croppedImage2;
 
-
             BP.Shuffle();
 
 
-/*          PictureBox pictureBox = new PictureBox();
+/*            PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Location = new Point(10, 10); // PictureBoxÀÇ À§Ä¡ ¼³Á¤
-            pictureBox.Size = new Size(cardWidth, cardHeight); // PictureBoxÀÇ Å©±â ¼³Á¤
+            pictureBox.Location = new Point(10, 10); // PictureBoxì˜ ìœ„ì¹˜ ì„¤ì •
+            pictureBox.Size = new Size(cardWidth, cardHeight); // PictureBoxì˜ í¬ê¸° ì„¤ì •
 
-            // Ä«µå ÀÌ¹ÌÁö¸¦ PictureBox¿¡ Ç¥½Ã
+            // ì¹´ë“œ ì´ë¯¸ì§€ë¥¼ PictureBoxì— í‘œì‹œ
             pictureBox.Image = back_card;
-            MessageBox.Show(BP.all_card[13].number.ToString());
-            MessageBox.Show(BP.all_card[13].shape.ToString());
 
-            // Form¿¡ PictureBox Ãß°¡
+            // Formì— PictureBox ì¶”ê°€
             this.Controls.Add(pictureBox);*/
 
 
