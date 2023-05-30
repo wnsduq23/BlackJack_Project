@@ -110,56 +110,62 @@
             pictureBox6.Margin = new Padding(2);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(40, 51);
+            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox6.TabIndex = 8;
             pictureBox6.TabStop = false;
             // 
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Location = new Point(107, 24);
+            pictureBox1.Location = new Point(107, 15);
             pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(40, 51);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             pictureBox2.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox2.Location = new Point(169, 24);
+            pictureBox2.Location = new Point(169, 15);
             pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(40, 51);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 10;
             pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
             pictureBox3.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox3.Location = new Point(237, 24);
+            pictureBox3.Location = new Point(237, 15);
             pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(40, 51);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 11;
             pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
             pictureBox4.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox4.Location = new Point(307, 24);
+            pictureBox4.Location = new Point(307, 15);
             pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(40, 51);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 12;
             pictureBox4.TabStop = false;
             // 
             // pictureBox5
             // 
             pictureBox5.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox5.Location = new Point(377, 24);
+            pictureBox5.Location = new Point(377, 15);
             pictureBox5.Margin = new Padding(2);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(40, 51);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 13;
             pictureBox5.TabStop = false;
             // 
@@ -170,6 +176,7 @@
             pictureBox7.Margin = new Padding(2);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(40, 51);
+            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox7.TabIndex = 14;
             pictureBox7.TabStop = false;
             // 
@@ -180,6 +187,7 @@
             pictureBox8.Margin = new Padding(2);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(40, 51);
+            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox8.TabIndex = 15;
             pictureBox8.TabStop = false;
             // 
@@ -190,6 +198,7 @@
             pictureBox9.Margin = new Padding(2);
             pictureBox9.Name = "pictureBox9";
             pictureBox9.Size = new Size(40, 51);
+            pictureBox9.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox9.TabIndex = 16;
             pictureBox9.TabStop = false;
             // 
@@ -200,6 +209,7 @@
             pictureBox10.Margin = new Padding(2);
             pictureBox10.Name = "pictureBox10";
             pictureBox10.Size = new Size(40, 51);
+            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox10.TabIndex = 17;
             pictureBox10.TabStop = false;
             // 
@@ -210,6 +220,7 @@
             pictureBox11.Margin = new Padding(2);
             pictureBox11.Name = "pictureBox11";
             pictureBox11.Size = new Size(76, 80);
+            pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox11.TabIndex = 18;
             pictureBox11.TabStop = false;
             // 
@@ -340,7 +351,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGreen;
-            ClientSize = new Size(542, 289);
+            ClientSize = new Size(546, 290);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(textBox2);

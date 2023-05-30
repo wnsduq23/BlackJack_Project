@@ -271,6 +271,8 @@ namespace Blackjack
             {
                 Console.WriteLine("User Win");
                 result = "User Win";
+                result += "\nUser get ";
+                result += (user.bet_cash * 2.5).ToString();
                 user.cash += user.bet_cash * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
             }
             else if (BlackJack(dealer))
@@ -282,7 +284,14 @@ namespace Blackjack
             {
                 Console.WriteLine("Dealer Busted");
                 result = "User Win";
+                result += "\nUser get ";
+                result += (user.bet_cash * 2.0).ToString();
                 user.cash += user.bet_cash * 2.0;
+            }
+            else if (user.busted)
+            {
+                Console.WriteLine("User Busted");
+                result = "Dealer Win";
             }
             //busted 확인해야함
             else
