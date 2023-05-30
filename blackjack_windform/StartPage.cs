@@ -34,9 +34,8 @@ namespace blackjack_windform
         public static Image[] cardImage;
         public static Image back_card;
 
-        private void MainForm_Load(object sender, EventArgs e)
+        public static void PushCardImage()
         {
-
             Image bmp = new Bitmap(blackjack_windform.Properties.Resources.카드전체); //이미지 데이터 저장할 때 쓰는 클래스
 
             Image spriteSheet = bmp;
@@ -76,22 +75,10 @@ namespace blackjack_windform
             Graphics graphics2 = Graphics.FromImage(croppedImage2);
             graphics2.DrawImage(spriteSheet, new Rectangle(0, 0, cardWidth, cardHeight), cropRect2, GraphicsUnit.Pixel);
             back_card = croppedImage2;
+        }
 
-            BP.Shuffle();
-
-
-/*            PictureBox pictureBox = new PictureBox();
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Location = new Point(10, 10); // PictureBox의 위치 설정
-            pictureBox.Size = new Size(cardWidth, cardHeight); // PictureBox의 크기 설정
-
-            // 카드 이미지를 PictureBox에 표시
-            pictureBox.Image = back_card;
-
-            // Form에 PictureBox 추가
-            this.Controls.Add(pictureBox);*/
-
-
+        private void MainForm_Load(object sender, EventArgs e)
+        {
 
         }
 
