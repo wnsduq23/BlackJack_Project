@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\김준엽\\Source\\Repos\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj": {}
+    "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj": {}
   },
   "projects": {
-    "C:\\Users\\김준엽\\Source\\Repos\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj": {
+    "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김준엽\\Source\\Repos\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj",
+        "projectUniqueName": "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj",
         "projectName": "blackjack_windform",
-        "projectPath": "C:\\Users\\김준엽\\Source\\Repos\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj",
-        "packagesPath": "C:\\Users\\김준엽\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김준엽\\Source\\Repos\\BlackJack_Project\\blackjack_windform\\obj\\",
+        "projectPath": "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj",
+        "packagesPath": "C:\\Users\\JHS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\김준엽\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\JHS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
