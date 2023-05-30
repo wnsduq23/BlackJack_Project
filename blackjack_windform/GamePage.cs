@@ -151,7 +151,7 @@ namespace blackjack_windform
             int dealing;
             int pair_bet;
             bool surrender;
-            char[] shape = { 's', 'c', 'h', 'd' };
+            char[] shape = { 'c', 'd', 'h', 's' };
             BP.User user = new BP.User();
             BP.Dealer dealer = new BP.Dealer();
 
@@ -162,6 +162,9 @@ namespace blackjack_windform
                     BP.PushInformationCard(shape[i], j + 1);
                 }
             }
+
+            blackjack_windform.StartPage.PushCardImage(); // 카드 이미지 넣기
+            
             while (user.cash > 0)        // 유저 잔고가 0이상일 경우 계속 게임을 할 수 있다.
             {
                 dealing = 0;  //나눠줄 올카드 인덱스
