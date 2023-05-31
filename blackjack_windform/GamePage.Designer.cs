@@ -69,6 +69,8 @@
             pictureBox24 = new PictureBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
+            label7 = new Label();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox0).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -142,7 +144,7 @@
             // pictureBox0
             // 
             pictureBox0.BackgroundImage = Properties.Resources.카드박스;
-            pictureBox0.Location = new Point(1017, 255);
+            pictureBox0.Location = new Point(1004, 275);
             pictureBox0.Name = "pictureBox0";
             pictureBox0.Size = new Size(156, 193);
             pictureBox0.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -469,17 +471,37 @@
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(1023, 30);
+            textBox3.Location = new Point(1023, 71);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(150, 31);
             textBox3.TabIndex = 57;
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(1023, 77);
+            textBox4.Location = new Point(1023, 139);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(150, 31);
             textBox4.TabIndex = 58;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(1023, 34);
+            label7.Name = "label7";
+            label7.Size = new Size(131, 25);
+            label7.TabIndex = 59;
+            label7.Text = "Dealer Score :";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Location = new Point(1023, 105);
+            label8.Name = "label8";
+            label8.Size = new Size(114, 25);
+            label8.TabIndex = 60;
+            label8.Text = "User Score :";
             // 
             // GamePage
             // 
@@ -487,6 +509,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGreen;
             ClientSize = new Size(1206, 820);
+            Controls.Add(label8);
+            Controls.Add(label7);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
             Controls.Add(pictureBox24);
@@ -604,5 +628,7 @@
         private PictureBox pictureBox24;
         private TextBox textBox3;
         private TextBox textBox4;
+        private Label label7;
+        private Label label8;
     }
 }

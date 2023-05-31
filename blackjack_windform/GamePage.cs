@@ -286,7 +286,7 @@ namespace blackjack_windform
 
                         if (user.busted)            //유저가 버스트 되었다면 게임 종료
                         {
-                            
+
                             break;
                         }
 
