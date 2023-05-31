@@ -101,7 +101,7 @@ namespace blackjack_windform
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Environment.Exit(0);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

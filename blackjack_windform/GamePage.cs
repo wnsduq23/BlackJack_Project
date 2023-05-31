@@ -112,6 +112,12 @@ namespace blackjack_windform
             foreach (PictureBox box in boxes)
             {
                 box.Image = null;
+                box.Visible = false;
+                /*
+                 * 사진 잘리는 버그 fix
+                 * visible = false, backColor = transparent
+                 * 카드 받을때 visible = true;
+                 */
             }
         }
         static bool Surrender(BP.Dealer dealer, BP.User user)
@@ -131,8 +137,6 @@ namespace blackjack_windform
             }
 
         }
-
-
         public void GameStart()
         {
             int dealer_index = 0;
@@ -148,6 +152,7 @@ namespace blackjack_windform
             foreach (PictureBox box in boxes)
             {
                 box.Image = null;
+                box.Visible = false;
             }
 
             /*
@@ -188,24 +193,23 @@ namespace blackjack_windform
                 MessageBox.Show("You have 5 seoconds to place your bets !!");
                 Thread.Sleep(5000);
 
-
-                boxes[dealer_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                boxes[dealer_index].Visible = true;
+                boxes[dealer_index++].Image = StartPage.cardImage[dealing];
                 dealer.GetCard(BP.all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
                                                                  // dealer가 ace카드 일 때의 예시 넣기
                                                                  //딜러의 카드가 ace일때 insurance 할지
                                                                  // BP.Insuarance(dealer, user);
 
-                boxes[dealer_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                boxes[dealer_index].Visible = true;
+                boxes[dealer_index++].Image = StartPage.cardImage[dealing];
                 dealer.GetCard(BP.all_card[dealing++]);
 
-                boxes[user_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                boxes[user_index].Visible = true;
+                boxes[user_index++].Image = StartPage.cardImage[dealing];
                 user.GetCard(BP.all_card[dealing++]);
 
-                boxes[user_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                boxes[user_index].Visible = true;
+                boxes[user_index++].Image = StartPage.cardImage[dealing];
                 user.GetCard(BP.all_card[dealing++]);
 
                 /*  if (user.insurance_bet > 0)
@@ -227,18 +231,12 @@ namespace blackjack_windform
                     BP.NewGame(dealer, user);
                     continue;
                 }
-                // dealing = BP.DoubleDown(user, dealing);
-
-                /* while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
-                 {
-                      //dealing = BP.HitOrStay(user, dealing);
-                 }*/
 
                 DialogResult dr = MessageBox.Show("Are you going to double down?", "DoubleDown_YesNo", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
-                    boxes[user_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                    boxes[user_index].Visible = true;
+                    boxes[user_index++].Image = StartPage.cardImage[dealing];
                     user.GetCard(BP.all_card[dealing++]);
 
                     //카드받을 때마다 점수 보여주기
@@ -259,8 +257,8 @@ namespace blackjack_windform
 
                     while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
                     {
-                        boxes[dealer_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        boxes[dealer_index].Visible = true;
+                        boxes[dealer_index++].Image = StartPage.cardImage[dealing];
                         dealer.GetCard(BP.all_card[dealing++]);
 
                         //카드받을 때마다 점수 보여주기
@@ -281,8 +279,8 @@ namespace blackjack_windform
                         "HIT_or_STAY", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        boxes[user_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        boxes[user_index].Visible = true;
+                        boxes[user_index++].Image = StartPage.cardImage[dealing];
                         user.GetCard(BP.all_card[dealing++]);
 
                         //카드받을 때마다 점수 보여주기
@@ -300,8 +298,8 @@ namespace blackjack_windform
                     {
                         while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
                         {
-                            boxes[dealer_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
-                            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                            boxes[dealer_index].Visible = true;
+                            boxes[dealer_index++].Image = StartPage.cardImage[dealing];
                             dealer.GetCard(BP.all_card[dealing++]);
 
                             //카드받을 때마다 점수 보여주기

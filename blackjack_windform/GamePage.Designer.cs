@@ -101,11 +101,13 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Maroon;
-            label1.Location = new Point(400, 300);
+            label1.Location = new Point(280, 180);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(406, 32);
+            label1.Size = new Size(281, 21);
             label1.TabIndex = 0;
             label1.Text = "B L A C K J A C K  P A Y S  3 T 0 1";
             // 
@@ -113,9 +115,10 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.Yellow;
-            label2.Location = new Point(413, 335);
+            label2.Location = new Point(289, 201);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(393, 25);
+            label2.Size = new Size(262, 15);
             label2.TabIndex = 1;
             label2.Text = "Dealer must stand on 17 and must draw on 16";
             // 
@@ -125,18 +128,21 @@
             label3.BorderStyle = BorderStyle.Fixed3D;
             label3.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Maroon;
-            label3.Location = new Point(370, 378);
+            label3.Location = new Point(259, 227);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Padding = new Padding(50, 10, 50, 10);
-            label3.Size = new Size(452, 50);
+            label3.Padding = new Padding(35, 6, 35, 6);
+            label3.Size = new Size(318, 33);
             label3.TabIndex = 2;
             label3.Text = "I N S U R A N C E  P A Y S  2 T 0 1";
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(214, 113);
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Location = new Point(150, 68);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(93, 145);
+            pictureBox1.Size = new Size(65, 87);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
@@ -144,9 +150,10 @@
             // pictureBox0
             // 
             pictureBox0.BackgroundImage = Properties.Resources.카드박스;
-            pictureBox0.Location = new Point(1004, 275);
+            pictureBox0.Location = new Point(716, 180);
+            pictureBox0.Margin = new Padding(2);
             pictureBox0.Name = "pictureBox0";
-            pictureBox0.Size = new Size(156, 193);
+            pictureBox0.Size = new Size(109, 116);
             pictureBox0.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox0.TabIndex = 18;
             pictureBox0.TabStop = false;
@@ -154,9 +161,10 @@
             // button1
             // 
             button1.Image = Properties.Resources._1달러2;
-            button1.Location = new Point(29, 500);
+            button1.Location = new Point(20, 300);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(46, 45);
+            button1.Size = new Size(32, 27);
             button1.TabIndex = 19;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -164,9 +172,10 @@
             // button2
             // 
             button2.Image = Properties.Resources._5달러;
-            button2.Location = new Point(90, 500);
+            button2.Location = new Point(63, 300);
+            button2.Margin = new Padding(2);
             button2.Name = "button2";
-            button2.Size = new Size(46, 45);
+            button2.Size = new Size(32, 27);
             button2.TabIndex = 20;
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
@@ -174,9 +183,10 @@
             // button3
             // 
             button3.Image = Properties.Resources._10달러;
-            button3.Location = new Point(29, 558);
+            button3.Location = new Point(20, 335);
+            button3.Margin = new Padding(2);
             button3.Name = "button3";
-            button3.Size = new Size(46, 45);
+            button3.Size = new Size(32, 27);
             button3.TabIndex = 21;
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
@@ -184,9 +194,10 @@
             // button4
             // 
             button4.Image = Properties.Resources._50달러;
-            button4.Location = new Point(90, 558);
+            button4.Location = new Point(63, 335);
+            button4.Margin = new Padding(2);
             button4.Name = "button4";
-            button4.Size = new Size(46, 45);
+            button4.Size = new Size(32, 27);
             button4.TabIndex = 22;
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
@@ -194,9 +205,10 @@
             // button5
             // 
             button5.Image = Properties.Resources._100달러;
-            button5.Location = new Point(29, 622);
+            button5.Location = new Point(20, 373);
+            button5.Margin = new Padding(2);
             button5.Name = "button5";
-            button5.Size = new Size(46, 45);
+            button5.Size = new Size(32, 27);
             button5.TabIndex = 23;
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
@@ -204,9 +216,10 @@
             // button6
             // 
             button6.Image = Properties.Resources._500달러;
-            button6.Location = new Point(90, 622);
+            button6.Location = new Point(63, 373);
+            button6.Margin = new Padding(2);
             button6.Name = "button6";
-            button6.Size = new Size(46, 45);
+            button6.Size = new Size(32, 27);
             button6.TabIndex = 24;
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
@@ -217,26 +230,29 @@
             label4.BorderStyle = BorderStyle.Fixed3D;
             label4.Font = new Font("맑은 고딕", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(39, 448);
+            label4.Location = new Point(27, 269);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(87, 32);
+            label4.Size = new Size(60, 22);
             label4.TabIndex = 25;
             label4.Text = "Betting";
             // 
             // textBox1
             // 
             textBox1.BackColor = Color.Gray;
-            textBox1.Location = new Point(29, 105);
+            textBox1.Location = new Point(20, 63);
+            textBox1.Margin = new Padding(2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(80, 31);
+            textBox1.Size = new Size(57, 23);
             textBox1.TabIndex = 26;
             // 
             // textBox2
             // 
             textBox2.BackColor = Color.Gray;
-            textBox2.Location = new Point(29, 200);
+            textBox2.Location = new Point(20, 120);
+            textBox2.Margin = new Padding(2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(80, 31);
+            textBox2.Size = new Size(57, 23);
             textBox2.TabIndex = 29;
             // 
             // label5
@@ -244,9 +260,10 @@
             label5.AutoSize = true;
             label5.BackColor = Color.FromArgb(64, 64, 64);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(29, 77);
+            label5.Location = new Point(20, 46);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(80, 25);
+            label5.Size = new Size(53, 15);
             label5.TabIndex = 30;
             label5.Text = "C a s h  ";
             label5.Click += label5_Click;
@@ -256,240 +273,290 @@
             label6.AutoSize = true;
             label6.BackColor = Color.FromArgb(64, 64, 64);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(29, 172);
+            label6.Location = new Point(20, 103);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(81, 25);
+            label6.Size = new Size(52, 15);
             label6.TabIndex = 31;
             label6.Text = "B e t     ";
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(270, 113);
+            pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.Location = new Point(189, 68);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(93, 145);
+            pictureBox2.Size = new Size(65, 87);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 32;
             pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
-            pictureBox3.Location = new Point(326, 113);
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.Location = new Point(228, 68);
+            pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(93, 145);
+            pictureBox3.Size = new Size(65, 87);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 33;
             pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
-            pictureBox4.Location = new Point(384, 113);
+            pictureBox4.BackColor = Color.Transparent;
+            pictureBox4.Location = new Point(269, 68);
+            pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(93, 145);
+            pictureBox4.Size = new Size(65, 87);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 36;
             pictureBox4.TabStop = false;
             // 
             // pictureBox5
             // 
-            pictureBox5.Location = new Point(441, 113);
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Location = new Point(309, 68);
+            pictureBox5.Margin = new Padding(2);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(93, 145);
+            pictureBox5.Size = new Size(65, 87);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 37;
             pictureBox5.TabStop = false;
             // 
             // pictureBox6
             // 
-            pictureBox6.Location = new Point(499, 113);
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Location = new Point(349, 68);
+            pictureBox6.Margin = new Padding(2);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(93, 145);
+            pictureBox6.Size = new Size(65, 87);
             pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox6.TabIndex = 38;
             pictureBox6.TabStop = false;
             // 
             // pictureBox7
             // 
-            pictureBox7.Location = new Point(559, 113);
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Location = new Point(391, 68);
+            pictureBox7.Margin = new Padding(2);
             pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(93, 145);
+            pictureBox7.Size = new Size(65, 87);
             pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox7.TabIndex = 39;
             pictureBox7.TabStop = false;
             // 
             // pictureBox8
             // 
-            pictureBox8.Location = new Point(620, 113);
+            pictureBox8.BackColor = Color.Transparent;
+            pictureBox8.Location = new Point(434, 68);
+            pictureBox8.Margin = new Padding(2);
             pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(93, 145);
+            pictureBox8.Size = new Size(65, 87);
             pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox8.TabIndex = 40;
             pictureBox8.TabStop = false;
             // 
             // pictureBox9
             // 
-            pictureBox9.Location = new Point(683, 113);
+            pictureBox9.BackColor = Color.Transparent;
+            pictureBox9.Location = new Point(478, 68);
+            pictureBox9.Margin = new Padding(2);
             pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(93, 145);
+            pictureBox9.Size = new Size(65, 87);
             pictureBox9.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox9.TabIndex = 41;
             pictureBox9.TabStop = false;
             // 
             // pictureBox10
             // 
-            pictureBox10.Location = new Point(744, 113);
+            pictureBox10.BackColor = Color.Transparent;
+            pictureBox10.Location = new Point(521, 68);
+            pictureBox10.Margin = new Padding(2);
             pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(93, 145);
+            pictureBox10.Size = new Size(65, 87);
             pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox10.TabIndex = 42;
             pictureBox10.TabStop = false;
             // 
             // pictureBox11
             // 
-            pictureBox11.Location = new Point(804, 113);
+            pictureBox11.BackColor = Color.Transparent;
+            pictureBox11.Location = new Point(563, 68);
+            pictureBox11.Margin = new Padding(2);
             pictureBox11.Name = "pictureBox11";
-            pictureBox11.Size = new Size(93, 145);
+            pictureBox11.Size = new Size(65, 87);
             pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox11.TabIndex = 43;
             pictureBox11.TabStop = false;
             // 
             // pictureBox12
             // 
-            pictureBox12.Location = new Point(879, 113);
+            pictureBox12.BackColor = Color.Transparent;
+            pictureBox12.Location = new Point(615, 68);
+            pictureBox12.Margin = new Padding(2);
             pictureBox12.Name = "pictureBox12";
-            pictureBox12.Size = new Size(93, 145);
+            pictureBox12.Size = new Size(65, 87);
             pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox12.TabIndex = 44;
             pictureBox12.TabStop = false;
             // 
             // pictureBox13
             // 
-            pictureBox13.Location = new Point(214, 493);
+            pictureBox13.BackColor = Color.Transparent;
+            pictureBox13.Location = new Point(150, 296);
+            pictureBox13.Margin = new Padding(2);
             pictureBox13.Name = "pictureBox13";
-            pictureBox13.Size = new Size(93, 145);
+            pictureBox13.Size = new Size(65, 87);
             pictureBox13.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox13.TabIndex = 45;
             pictureBox13.TabStop = false;
             // 
             // pictureBox14
             // 
-            pictureBox14.Location = new Point(270, 493);
+            pictureBox14.BackColor = Color.Transparent;
+            pictureBox14.Location = new Point(189, 296);
+            pictureBox14.Margin = new Padding(2);
             pictureBox14.Name = "pictureBox14";
-            pictureBox14.Size = new Size(93, 145);
+            pictureBox14.Size = new Size(65, 87);
             pictureBox14.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox14.TabIndex = 46;
             pictureBox14.TabStop = false;
             // 
             // pictureBox15
             // 
-            pictureBox15.Location = new Point(326, 493);
+            pictureBox15.BackColor = Color.Transparent;
+            pictureBox15.Location = new Point(228, 296);
+            pictureBox15.Margin = new Padding(2);
             pictureBox15.Name = "pictureBox15";
-            pictureBox15.Size = new Size(93, 145);
+            pictureBox15.Size = new Size(65, 87);
             pictureBox15.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox15.TabIndex = 47;
             pictureBox15.TabStop = false;
             // 
             // pictureBox16
             // 
-            pictureBox16.Location = new Point(384, 493);
+            pictureBox16.BackColor = Color.Transparent;
+            pictureBox16.Location = new Point(269, 296);
+            pictureBox16.Margin = new Padding(2);
             pictureBox16.Name = "pictureBox16";
-            pictureBox16.Size = new Size(93, 145);
+            pictureBox16.Size = new Size(65, 87);
             pictureBox16.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox16.TabIndex = 48;
             pictureBox16.TabStop = false;
             // 
             // pictureBox17
             // 
-            pictureBox17.Location = new Point(441, 493);
+            pictureBox17.BackColor = Color.Transparent;
+            pictureBox17.Location = new Point(309, 296);
+            pictureBox17.Margin = new Padding(2);
             pictureBox17.Name = "pictureBox17";
-            pictureBox17.Size = new Size(93, 145);
+            pictureBox17.Size = new Size(65, 87);
             pictureBox17.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox17.TabIndex = 49;
             pictureBox17.TabStop = false;
             // 
             // pictureBox18
             // 
-            pictureBox18.Location = new Point(499, 493);
+            pictureBox18.BackColor = Color.Transparent;
+            pictureBox18.Location = new Point(349, 296);
+            pictureBox18.Margin = new Padding(2);
             pictureBox18.Name = "pictureBox18";
-            pictureBox18.Size = new Size(93, 145);
+            pictureBox18.Size = new Size(65, 87);
             pictureBox18.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox18.TabIndex = 50;
             pictureBox18.TabStop = false;
             // 
             // pictureBox19
             // 
-            pictureBox19.Location = new Point(559, 493);
+            pictureBox19.BackColor = Color.Transparent;
+            pictureBox19.Location = new Point(391, 296);
+            pictureBox19.Margin = new Padding(2);
             pictureBox19.Name = "pictureBox19";
-            pictureBox19.Size = new Size(93, 145);
+            pictureBox19.Size = new Size(65, 87);
             pictureBox19.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox19.TabIndex = 51;
             pictureBox19.TabStop = false;
             // 
             // pictureBox20
             // 
-            pictureBox20.Location = new Point(620, 493);
+            pictureBox20.BackColor = Color.Transparent;
+            pictureBox20.Location = new Point(434, 296);
+            pictureBox20.Margin = new Padding(2);
             pictureBox20.Name = "pictureBox20";
-            pictureBox20.Size = new Size(93, 145);
+            pictureBox20.Size = new Size(65, 87);
             pictureBox20.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox20.TabIndex = 52;
             pictureBox20.TabStop = false;
             // 
             // pictureBox21
             // 
-            pictureBox21.Location = new Point(683, 493);
+            pictureBox21.BackColor = Color.Transparent;
+            pictureBox21.Location = new Point(478, 296);
+            pictureBox21.Margin = new Padding(2);
             pictureBox21.Name = "pictureBox21";
-            pictureBox21.Size = new Size(93, 145);
+            pictureBox21.Size = new Size(65, 87);
             pictureBox21.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox21.TabIndex = 53;
             pictureBox21.TabStop = false;
             // 
             // pictureBox22
             // 
-            pictureBox22.Location = new Point(744, 493);
+            pictureBox22.BackColor = Color.Transparent;
+            pictureBox22.Location = new Point(521, 296);
+            pictureBox22.Margin = new Padding(2);
             pictureBox22.Name = "pictureBox22";
-            pictureBox22.Size = new Size(93, 145);
+            pictureBox22.Size = new Size(65, 87);
             pictureBox22.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox22.TabIndex = 54;
             pictureBox22.TabStop = false;
             // 
             // pictureBox23
             // 
-            pictureBox23.Location = new Point(804, 493);
+            pictureBox23.BackColor = Color.Transparent;
+            pictureBox23.Location = new Point(563, 296);
+            pictureBox23.Margin = new Padding(2);
             pictureBox23.Name = "pictureBox23";
-            pictureBox23.Size = new Size(93, 145);
+            pictureBox23.Size = new Size(65, 87);
             pictureBox23.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox23.TabIndex = 55;
             pictureBox23.TabStop = false;
             // 
             // pictureBox24
             // 
-            pictureBox24.Location = new Point(879, 493);
+            pictureBox24.BackColor = Color.Transparent;
+            pictureBox24.Location = new Point(615, 296);
+            pictureBox24.Margin = new Padding(2);
             pictureBox24.Name = "pictureBox24";
-            pictureBox24.Size = new Size(93, 145);
+            pictureBox24.Size = new Size(65, 87);
             pictureBox24.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox24.TabIndex = 56;
             pictureBox24.TabStop = false;
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(1023, 71);
+            textBox3.Location = new Point(716, 43);
+            textBox3.Margin = new Padding(2);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(150, 31);
+            textBox3.Size = new Size(106, 23);
             textBox3.TabIndex = 57;
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(1023, 139);
+            textBox4.Location = new Point(716, 91);
+            textBox4.Margin = new Padding(2);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(150, 31);
+            textBox4.Size = new Size(106, 23);
             textBox4.TabIndex = 58;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(1023, 34);
+            label7.Location = new Point(716, 20);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(131, 25);
+            label7.Size = new Size(88, 15);
             label7.TabIndex = 59;
             label7.Text = "Dealer Score :";
             // 
@@ -497,18 +564,19 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(1023, 105);
+            label8.Location = new Point(716, 71);
+            label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(114, 25);
+            label8.Size = new Size(77, 15);
             label8.TabIndex = 60;
             label8.Text = "User Score :";
             // 
             // GamePage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGreen;
-            ClientSize = new Size(1206, 820);
+            ClientSize = new Size(844, 492);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(textBox4);
@@ -552,6 +620,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(2);
             Name = "GamePage";
             Text = "GamePage";
             Load += GamePage_Load;
