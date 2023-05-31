@@ -184,6 +184,11 @@ namespace blackjack_windform
                 textBox2.Text = user.bet_cash.ToString();
                 // user.pair_bet = BP.PairBetting(user);
 
+                //Surrender을 실행하기전 먼저 배팅을 해야하기 때문에 5초동안의 배팅할 시간을 주고 이후 surrender 여부를 판단하는 messagebox가 뜨도록 구현
+                MessageBox.Show("You have 5 seoconds to place your bets !!");
+                Thread.Sleep(5000);
+
+
                 boxes[dealer_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                 dealer.GetCard(BP.all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
