@@ -19,6 +19,8 @@ namespace blackjack_windform
         public static double bet_amount = 0;
 
         public static double total_betamount = 0;
+        public static double total_insurance_betamount = 0;
+        public static bool ask_for_insurance;
         public GamePage()
         {
             InitializeComponent();
@@ -57,199 +59,385 @@ namespace blackjack_windform
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            if (ask_for_insurance)
             {
-                bet_amount = user.cash;
+                if (bet_amount > total_betamount / 2 && user.cash > bet_amount) // 유저가 betting 금액의 절반 보다 더 많은 금액을 베팅하려고 할 때 최대인 절반을 베팅으로 처리
+                {
+                    bet_amount = total_betamount / 2;
 
-                total_betamount += bet_amount;
+                    total_insurance_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
-            }
-            else if(user.cash == 0)
-            {
-                MessageBox.Show("Not enough cash to Betting!", "error!");
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
+                else if (user.cash == 0 || bet_amount == total_betamount / 2)
+                {
+                    MessageBox.Show("This is the maximum amount you can bet on!", "error!");
+                }
+                else
+                {
+                    bet_amount = 1;
+
+                    total_insurance_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
             }
             else
             {
-                bet_amount = 1;
+                if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+                {
+                    bet_amount = user.cash;
 
-                total_betamount += bet_amount;
+                    total_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
+                else if (user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to Betting!", "error!");
+                }
+                else
+                {
+                    bet_amount = 1;
+
+                    total_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
+
             }
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            if (ask_for_insurance)
             {
-                bet_amount = user.cash;
+                if (bet_amount > total_betamount / 2 && user.cash > bet_amount) // 유저가 betting 금액의 절반 보다 더 많은 금액을 베팅하려고 할 때 최대인 절반을 베팅으로 처리
+                {
+                    bet_amount = total_betamount / 2;
 
-                total_betamount += bet_amount;
+                    total_insurance_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
+                else if (user.cash == 0 || bet_amount == total_betamount / 2)
+                {
+                    MessageBox.Show("This is the maximum amount you can bet on!", "error!");
+                }
+                else
+                {
+                    bet_amount = 5;
 
+                    total_insurance_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
             }
-            else if (user.cash == 0)
-            {
-                MessageBox.Show("Not enough cash to Betting!", "error!");
-            }
-
             else
             {
-                bet_amount = 5;
+                if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+                {
+                    bet_amount = user.cash;
 
-                total_betamount += bet_amount;
+                    total_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+
+                }
+                else if (user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to Betting!", "error!");
+                }
+
+                else
+                {
+                    bet_amount = 5;
+
+                    total_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
-            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            if (ask_for_insurance)
             {
-                bet_amount = user.cash;
+                if (bet_amount > total_betamount / 2 && user.cash > bet_amount) // 유저가 betting 금액의 절반 보다 더 많은 금액을 베팅하려고 할 때 최대인 절반을 베팅으로 처리
+                {
+                    bet_amount = total_betamount / 2;
 
-                total_betamount += bet_amount;
+                    total_insurance_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
+                else if (user.cash == 0 || bet_amount == total_betamount / 2)
+                {
+                    MessageBox.Show("This is the maximum amount you can bet on!", "error!");
+                }
+                else
+                {
+                    bet_amount = 10;
 
-            }
-            else if (user.cash == 0)
-            {
-                MessageBox.Show("Not enough cash to Betting!", "error!");
+                    total_insurance_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
             }
             else
             {
-                bet_amount = 10;
+                if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+                {
+                    bet_amount = user.cash;
 
-                total_betamount += bet_amount;
+                    total_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+
+                }
+                else if (user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to Betting!", "error!");
+                }
+                else
+                {
+                    bet_amount = 10;
+
+                    total_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
             }
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            if (ask_for_insurance)
             {
-                bet_amount = user.cash;
+                if (bet_amount > total_betamount / 2 && user.cash > bet_amount) // 유저가 betting 금액의 절반 보다 더 많은 금액을 베팅하려고 할 때 최대인 절반을 베팅으로 처리
+                {
+                    bet_amount = total_betamount / 2;
 
-                total_betamount += bet_amount;
+                    total_insurance_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
+                else if (user.cash == 0 || bet_amount == total_betamount / 2)
+                {
+                    MessageBox.Show("This is the maximum amount you can bet on!", "error!");
+                }
+                else
+                {
+                    bet_amount = 50;
 
-            }
-            else if (user.cash == 0)
-            {
-                MessageBox.Show("Not enough cash to Betting!", "error!");
+                    total_insurance_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
             }
             else
             {
-                bet_amount = 50;
 
-                total_betamount += bet_amount;
+                if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+                {
+                    bet_amount = user.cash;
 
-                user.cash -= bet_amount;
+                    total_betamount += bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+
+                }
+                else if (user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to Betting!", "error!");
+                }
+                else
+                {
+                    bet_amount = 50;
+
+                    total_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
             }
-
         }
         private void button5_Click(object sender, EventArgs e)
         {
 
-            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            if (ask_for_insurance)
             {
-                bet_amount = user.cash;
+                if (bet_amount > total_betamount / 2 && user.cash > bet_amount) // 유저가 betting 금액의 절반 보다 더 많은 금액을 베팅하려고 할 때 최대인 절반을 베팅으로 처리
+                {
+                    bet_amount = total_betamount / 2;
 
-                total_betamount += bet_amount;
+                    total_insurance_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
+                else if (user.cash == 0 || bet_amount == total_betamount / 2)
+                {
+                    MessageBox.Show("This is the maximum amount you can bet on!", "error!");
+                }
+                else
+                {
+                    bet_amount = 100;
 
-            }
-            else if (user.cash == 0)
-            {
-                MessageBox.Show("Not enough cash to Betting!", "error!");
+                    total_insurance_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
             }
             else
             {
-                bet_amount = 100;
+                if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+                {
+                    bet_amount = user.cash;
 
-                total_betamount += bet_amount;
+                    total_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+
+                }
+                else if (user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to Betting!", "error!");
+                }
+                else
+                {
+                    bet_amount = 100;
+
+                    total_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
 
-            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+           if (ask_for_insurance)
             {
-                bet_amount = user.cash;
+                if (bet_amount > total_betamount / 2 && user.cash > bet_amount) // 유저가 betting 금액의 절반 보다 더 많은 금액을 베팅하려고 할 때 최대인 절반을 베팅으로 처리
+                {
+                    bet_amount = total_betamount / 2;
 
-                total_betamount += bet_amount;
+                    total_insurance_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
+                else if (user.cash == 0 || bet_amount == total_betamount / 2)
+                {
+                    MessageBox.Show("This is the maximum amount you can bet on!", "error!");
+                }
+                else
+                {
+                    bet_amount = 500;
 
-            }
-            else if (user.cash == 0)
-            {
-                MessageBox.Show("Not enough cash to Betting!", "error!");
+                    total_insurance_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox5.Text = total_insurance_betamount.ToString();
+                }
             }
             else
             {
-                bet_amount = 500;
+                if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+                {
+                    bet_amount = user.cash;
 
-                total_betamount += bet_amount;
+                    total_betamount += bet_amount;
 
-                user.cash -= bet_amount;
+                    user.cash -= bet_amount;
 
-                textBox1.Text = user.cash.ToString();
-                textBox2.Text = total_betamount.ToString();
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+
+                }
+                else if (user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to Betting!", "error!");
+                }
+                else
+                {
+                    bet_amount = 500;
+
+                    total_betamount += bet_amount;
+
+                    user.cash -= bet_amount;
+
+                    textBox1.Text = user.cash.ToString();
+                    textBox2.Text = total_betamount.ToString();
+                }
             }
-
-
         }
         static void showResult(BP.Dealer dealer, BP.User user)
         {
@@ -344,7 +532,6 @@ namespace blackjack_windform
              */
             int dealing;
             bool surrender;
-            bool ask_for_insurance;
             char[] shape = { 'c', 'd', 'h', 's' };
             bet_amount = 0;
             total_betamount = 0;
@@ -378,6 +565,7 @@ namespace blackjack_windform
                 user_index = 12;
                 dealing = 0;  //나눠줄 올카드 인덱스
                 BP.Shuffle();  //카드를 섞는다. 
+                label3.Enabled = false; 
                 textBox1.Text = user.cash.ToString();
                 //user.bet_cash = BP.Betting(user, 1);       //배팅
                 textBox2.Text = bet_amount.ToString();
@@ -615,25 +803,16 @@ namespace blackjack_windform
         {
             DialogResult result;
 
-            result = MessageBox.Show("You can Insurance betting now!");
+            result = MessageBox.Show("if you finish insurance betting, Click \"INSURANCE PAYS 2TO1\"");
             label3.Enabled = true;
         }
         private void label3_Click(object sender, EventArgs e)
         {
             DialogResult result;
 
-            if (BP.insurance_bet > total_betamount / 2)
-            {
-                result = MessageBox.Show("베팅 금액의 절반까지만 베팅할 수 있습니다! 다시 베팅해주세요");
-            }
-            else
-            {
-                BP.insurance_bet = (int)total_betamount;
-                textBox5.Text = BP.insurance_bet.ToString();
-                //캐시(소지금)에서 insurance betting 만큼 빼는 거였음..
-            }
-            label3.Enabled = false;
             InsuranceLabelTaskCompletionSource?.SetResult(true);
+            //캐시(소지금)에서 insurance betting 만큼 빼는 거였음..
+            label3.Enabled = false;
         }
 
         private void label9_Click(object sender, EventArgs e)
