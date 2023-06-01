@@ -75,3 +75,4 @@ C:\Users\김준엽\Source\Repos\BlackJack_Project\blackjack_windform\obj\Debug\n
 C:\Users\김준엽\Source\Repos\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.genruntimeconfig.cache
 C:\Users\김준엽\Source\Repos\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\ref\blackjack_windform.dll
 C:\Users\김준엽\source\repos\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.PairBetting.resources
+C:\Users\JHS\Desktop\c# 팀플\BlackJack_Project\blackjack_windform\obj\Debug\net7.0-windows\blackjack_windform.PairBetting.resources

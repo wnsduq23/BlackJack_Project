@@ -19,6 +19,8 @@ namespace blackjack_windform
         private bool insurance_box_has_value = false;
 
         public static double bet_amount = 0;
+
+        public static double total_betamount = 0;
         public GamePage()
         {
             InitializeComponent();
@@ -31,94 +33,223 @@ namespace blackjack_windform
 
         }
 
+        private void GamePage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // 실행 중인 코드를 종료하고 애플리케이션을 종료합니다.
+            Environment.Exit(0);
+
+        }
+
+        private CancellationTokenSource delayCancellation;
+
         private async Task WaitForBettingImageSelection()
         {
-            await Task.Delay(2000);
+            delayCancellation = new CancellationTokenSource(); //delayCancellation 객체가 CancellationTokenSource로 초기화됩니다. 이 객체는 Task.Delay 작업을 취소하기 위해 사용됩니다.
 
-            if (isBettingCompleted == true)
+            try
             {
-                textBox2.Text = bet_amount.ToString();
+                await Task.Delay(100000, delayCancellation.Token); //비동기적으로 100초 기다리게 하기. (= 다른 작업 수행 가능)
+            }
+            catch (TaskCanceledException)
+            {
+                // 예외 처리를 코드
+                return;
             }
 
         }
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            {
+                bet_amount = user.cash;
 
-            isBettingCompleted = true;
+                total_betamount += bet_amount;
 
-            bet_amount = 1;
+                user.cash -= bet_amount;
 
-            user.cash -= bet_amount;
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
+            else if(user.cash == 0)
+            {
+                MessageBox.Show("Not enough cash to Betting!", "error!");
+            }
+            else
+            {
+                bet_amount = 1;
 
-            textBox1.Text = user.cash.ToString();
-            textBox2.Text = bet_amount.ToString();
+                total_betamount += bet_amount;
 
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
         }
 
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            isBettingCompleted = true;
+            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            {
+                bet_amount = user.cash;
 
-            bet_amount = 5;
+                total_betamount += bet_amount;
 
-            user.cash -= bet_amount;
+                user.cash -= bet_amount;
 
-            textBox1.Text = user.cash.ToString();
-            textBox2.Text = bet_amount.ToString();
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+
+            }
+            else if (user.cash == 0)
+            {
+                MessageBox.Show("Not enough cash to Betting!", "error!");
+            }
+
+            else
+            {
+                bet_amount = 5;
+
+                total_betamount += bet_amount;
+
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
 
         }
 
-        private async void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            isBettingCompleted = true;
 
-            bet_amount = 10;
+            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            {
+                bet_amount = user.cash;
 
-            user.cash -= bet_amount;
+                total_betamount += bet_amount;
 
-            textBox1.Text = user.cash.ToString();
-            textBox2.Text = bet_amount.ToString();
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+
+            }
+            else if (user.cash == 0)
+            {
+                MessageBox.Show("Not enough cash to Betting!", "error!");
+            }
+            else
+            {
+                bet_amount = 10;
+
+                total_betamount += bet_amount;
+
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
 
 
         }
 
-        private async void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            isBettingCompleted = true;
 
-            bet_amount = 50;
+            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            {
+                bet_amount = user.cash;
 
-            user.cash -= bet_amount;
+                total_betamount += bet_amount;
 
-            textBox1.Text = user.cash.ToString();
-            textBox2.Text = bet_amount.ToString();
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+
+            }
+            else if (user.cash == 0)
+            {
+                MessageBox.Show("Not enough cash to Betting!", "error!");
+            }
+            else
+            {
+                bet_amount = 50;
+
+                total_betamount += bet_amount;
+
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
 
         }
-        private async void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            isBettingCompleted = true;
 
-            bet_amount = 100;
+            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            {
+                bet_amount = user.cash;
 
-            user.cash -= bet_amount;
+                total_betamount += bet_amount;
 
-            textBox1.Text = user.cash.ToString();
-            textBox2.Text = bet_amount.ToString();
+                user.cash -= bet_amount;
 
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+
+            }
+            else if (user.cash == 0)
+            {
+                MessageBox.Show("Not enough cash to Betting!", "error!");
+            }
+            else
+            {
+                bet_amount = 100;
+
+                total_betamount += bet_amount;
+
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
 
         }
 
-        private async void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            isBettingCompleted = true;
 
-            bet_amount = 500;
+            if (user.cash < bet_amount) // 유저가 있는 돈보다 더 많은 금액을 베팅하려고 할 때 올인으로 처리.
+            {
+                bet_amount = user.cash;
 
-            user.cash -= bet_amount;
+                total_betamount += bet_amount;
 
-            textBox1.Text = user.cash.ToString();
-            textBox2.Text = bet_amount.ToString();
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+
+            }
+            else if (user.cash == 0)
+            {
+                MessageBox.Show("Not enough cash to Betting!", "error!");
+            }
+            else
+            {
+                bet_amount = 500;
+
+                total_betamount += bet_amount;
+
+                user.cash -= bet_amount;
+
+                textBox1.Text = user.cash.ToString();
+                textBox2.Text = total_betamount.ToString();
+            }
 
 
         }
@@ -207,6 +338,10 @@ namespace blackjack_windform
             bool ask_for_insurance;
             char[] shape = { 'c', 'd', 'h', 's' };
             bet_amount = 0;
+            total_betamount = 0;
+
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
 
             user = new BP.User();
             dealer = new BP.Dealer();
@@ -235,7 +370,7 @@ namespace blackjack_windform
                 textBox6.Text = BP.pair_bet.ToString();
 
                 //Surrender을 실행하기전 먼저 배팅을 해야하기 때문에 5초동안의 배팅할 시간을 주고 이후 surrender 여부를 판단하는 messagebox가 뜨도록 구현
-                MessageBox.Show("You have 2 seoconds to place your bets !!");
+                MessageBox.Show("Bet by clicking on the betting image, press the confirm button.", "Betting");
 
                 await WaitForBettingImageSelection();
 
@@ -294,13 +429,15 @@ namespace blackjack_windform
                     MessageBox.Show("Dealer Win");
                     clearImage();
                     BP.NewGame(dealer, user);
+                    textBox3.Text = "";
+                    textBox4.Text = "";
                     textBox5.Text = "";
                     textBox6.Text = "";
                     continue;
                 }
 
                 DialogResult dr = MessageBox.Show("Are you going to double down?", "DoubleDown_YesNo", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.Yes)
+                if (dr == DialogResult.Yes && user.cash > 0)
                 {
                     boxes[user_index].Visible = true;
                     boxes[user_index++].Image = StartPage.cardImage[dealing];
@@ -309,11 +446,11 @@ namespace blackjack_windform
                     //카드받을 때마다 점수 보여주기
                     textBox3.Text = Convert.ToString(dealer.score);
                     textBox4.Text = Convert.ToString(user.score);
-                    user.cash -= bet_amount;
+                    user.cash -= total_betamount;
                     textBox1.Text = user.cash.ToString();
 
                     //배팅 2배로
-                    bet_amount = bet_amount * 2;
+                    total_betamount *= 2;
 
                     textBox2.Text = Convert.ToString(int.Parse(textBox2.Text) * 2);
 
@@ -322,6 +459,8 @@ namespace blackjack_windform
                         showResult(dealer, user);
                         clearImage();
                         BP.NewGame(dealer, user);
+                        textBox3.Text = "";
+                        textBox4.Text = "";
                         textBox5.Text = "";
                         textBox6.Text = "";
                         continue;
@@ -341,9 +480,16 @@ namespace blackjack_windform
                     showResult(dealer, user);
                     clearImage();
                     BP.NewGame(dealer, user);
+                    textBox3.Text = "";
+                    textBox4.Text = "";
                     textBox5.Text = "";
                     textBox6.Text = "";
                     continue;
+                }
+
+                else if (dr == DialogResult.Yes && user.cash == 0)
+                {
+                    MessageBox.Show("Not enough cash to doubledown!", "error!");
                 }
 
                 DialogResult result;
@@ -392,6 +538,8 @@ namespace blackjack_windform
                     showResult(dealer, user);
                     clearImage();
                     BP.NewGame(dealer, user);
+                    textBox3.Text = "";
+                    textBox4.Text = "";
                     textBox5.Text = "";
                     textBox6.Text = "";
                     continue;
@@ -404,6 +552,8 @@ namespace blackjack_windform
                 showResult(dealer, user); //게임 결과
                 clearImage();
                 BP.NewGame(dealer, user);
+                textBox3.Text = "";
+                textBox4.Text = "";
                 textBox5.Text = "";
                 textBox6.Text = "";
             }
@@ -459,6 +609,27 @@ namespace blackjack_windform
         private void textBox5_TextChanged(object sender, EventArgs e)// insurance bet
         {
             insurance_box_has_value = !string.IsNullOrEmpty(textBox5.Text);
+        }
+
+        private void button7_Click(object sender, EventArgs e) // 베팅확정
+        {
+            if (delayCancellation != null)
+            {
+                delayCancellation.Cancel();
+                delayCancellation = null;
+            }
+
+            textBox2.Text = total_betamount.ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e) // 베팅취소
+        {
+
+
+            user.cash += total_betamount;
+            textBox1.Text = user.cash.ToString();
+            total_betamount = 0;
+            textBox2.Text = total_betamount.ToString();
         }
     }
 
