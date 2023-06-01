@@ -260,8 +260,8 @@ namespace blackjack_windform
             MessageBox.Show(result);
 
             DialogResult dialogResult;
-            dialogResult = MessageBox.Show("Wanna play more?", "BlackJack", MessageBoxButtons.OKCancel);
-            if (dialogResult == DialogResult.Cancel)
+            dialogResult = MessageBox.Show("Wanna play more?", "BlackJack", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No)
             {
                 Environment.Exit(0);
             }
@@ -289,13 +289,14 @@ namespace blackjack_windform
         static bool Surrender(BP.Dealer dealer, BP.User user)
         {
             DialogResult result;
-            result = MessageBox.Show("Do you want to surrender?", "Surrender", MessageBoxButtons.OKCancel);
+            result = MessageBox.Show("Do you want to surrender?", "Surrender", MessageBoxButtons.YesNo);
 
-            if (result == DialogResult.OK)
+            if (result == DialogResult.Yes)
             {
                 user.Surrender(dealer);
-
+         
                 return true;
+
             }
             else
             {
@@ -418,6 +419,7 @@ namespace blackjack_windform
                 }
 
                 //카드받을 때마다 점수 보여주기
+                
                 textBox3.Text = Convert.ToString(dealer.score);
                 textBox4.Text = Convert.ToString(user.score);
 
@@ -433,6 +435,15 @@ namespace blackjack_windform
                     textBox4.Text = "";
                     textBox5.Text = "";
                     textBox6.Text = "";
+                    DialogResult dialogResult;
+
+
+                    dialogResult = MessageBox.Show("Wanna play more?", "BlackJack", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        Environment.Exit(0);
+                    }
+
                     continue;
                 }
 
@@ -613,13 +624,21 @@ namespace blackjack_windform
 
         private void button7_Click(object sender, EventArgs e) // 베팅확정
         {
-            if (delayCancellation != null)
+            if (total_betamount == 0)
             {
-                delayCancellation.Cancel();
-                delayCancellation = null;
+                MessageBox.Show("You have to bet!", "error!");
             }
+            else
+            {
+                if (delayCancellation != null)
+                {
+                    delayCancellation.Cancel();
+                    delayCancellation = null;
+                }
 
-            textBox2.Text = total_betamount.ToString();
+
+                textBox2.Text = total_betamount.ToString();
+            }
         }
 
         private void button8_Click(object sender, EventArgs e) // 베팅취소

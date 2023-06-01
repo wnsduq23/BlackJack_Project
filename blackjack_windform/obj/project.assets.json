@@ -8,19 +8,19 @@
     "net7.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\박준형\\.nuget\\packages\\": {}
+    "C:\\Users\\JHS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\박준형\\OneDrive\\바탕 화면\\back\\blackjack_windform\\blackjack_windform.csproj",
+      "projectUniqueName": "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj",
       "projectName": "blackjack_windform",
-      "projectPath": "C:\\Users\\박준형\\OneDrive\\바탕 화면\\back\\blackjack_windform\\blackjack_windform.csproj",
-      "packagesPath": "C:\\Users\\박준형\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\박준형\\OneDrive\\바탕 화면\\back\\blackjack_windform\\obj\\",
+      "projectPath": "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\blackjack_windform.csproj",
+      "packagesPath": "C:\\Users\\JHS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\JHS\\Desktop\\c# 팀플\\BlackJack_Project\\blackjack_windform\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\박준형\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\JHS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
