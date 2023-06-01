@@ -30,7 +30,7 @@ namespace blackjack_windform
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BP.pair_bet = int.Parse(textBox1.Text);
+            BP.pair_bet = int.Parse(textBox1.Text); // overflow 처리 필요 ? 
             this.Close();
         }
 

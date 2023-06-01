@@ -306,6 +306,16 @@ namespace blackjack_windform
 
         BP.User user;
         BP.Dealer dealer;
+        private TaskCompletionSource<bool> InsuranceLabelTaskCompletionSource;
+
+        private async Task WaitForInsuranceLabelAsync()
+        {
+            // A 버튼을 누를 때까지 TaskCompletionSource를 사용하여 대기합니다.
+            InsuranceLabelTaskCompletionSource = new TaskCompletionSource<bool>();
+
+            // TaskCompletionSource.Task를 비동기적으로 대기합니다.
+            await InsuranceLabelTaskCompletionSource.Task;
+        }
 
         private static bool isBettingCompleted = false;
         public async void GameStart()
@@ -387,17 +397,14 @@ namespace blackjack_windform
                 if (ask_for_insurance)
                 {
                     CanDoInsuranceBetting();
+                    await WaitForInsuranceLabelAsync();
                 }
                 else
                 {
                     label1.Enabled = false;
-                    textBox5.Text = BP.insurance_bet.ToString();
                 }
-
-                //while (!insurance_box_has_value)
-                //{
-                //    System.Threading.Thread.Sleep(100);
-                //}
+                BP.insurance_bet = (int)bet_amount;
+                textBox5.Text = BP.insurance_bet.ToString();
 
                 boxes[dealer_index].Visible = true;
                 boxes[dealer_index++].Image = StartPage.back_card;
@@ -414,7 +421,7 @@ namespace blackjack_windform
                 if (BP.pair_bet > 0)
                 {
                     BP.CheckPairBetting(user);
-                    textBox1.Text = user.cash.ToString(); // 여기 왜 최신화가 안되지 ?
+                    textBox1.Text = user.cash.ToString();
                 }
 
                 //카드받을 때마다 점수 보여주기
@@ -576,6 +583,8 @@ namespace blackjack_windform
         private void label3_Click(object sender, EventArgs e)
         {
             DialogResult result;
+
+            InsuranceLabelTaskCompletionSource?.SetResult(true);
             if (BP.insurance_bet > bet_amount / 2)
             {
                 result = MessageBox.Show("베팅 금액의 절반까지만 베팅할 수 있습니다! 다시 베팅해주세요");
@@ -584,7 +593,7 @@ namespace blackjack_windform
             {
                 BP.insurance_bet = (int)bet_amount;
                 textBox5.Text = BP.insurance_bet.ToString();
-                //인슈런스 베팅은 가상의 금액이라고 생각해야함 ( 캐시에서 빼는거 아님 )
+                //캐시(소지금)에서 insurance betting 만큼 빼는 거였음..
                 bet_amount = 0;
                 textBox2.Text = bet_amount.ToString();
             }
