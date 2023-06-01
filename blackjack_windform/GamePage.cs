@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using BP = Blackjack.Program;
 
 namespace blackjack_windform
@@ -186,7 +187,6 @@ namespace blackjack_windform
             더블다운 여부 확인 -> hit or stay 여부 확인 -> 등 등 계속 게임 진행 -> 21이 넘지 않고 게임 마무리될경우 result_game으로 결과 확인
              */
             int dealing;
-            int pair_bet;
             bool surrender;
             char[] shape = { 'c', 'd', 'h', 's' };
             bet_amount = 0;
@@ -243,11 +243,8 @@ namespace blackjack_windform
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                 user.GetCard(BP.all_card[dealing++]);
 
-                /*  if (user.insurance_bet > 0)
-                      BP.CheckInsuranceBetting(dealer, user);
-                  if (user.pair_bet > 0)
-                      BP.CheckPairBetting(user);
-                */
+                if (BP.pair_bet > 0)
+                    BP.CheckPairBetting(user);
 
                 //카드받을 때마다 점수 보여주기
                 textBox3.Text = Convert.ToString(dealer.score);
@@ -376,6 +373,31 @@ namespace blackjack_windform
         private void GamePage_Shown(object sender, EventArgs e)
         {
             GameStart();
+        }
+
+        public void CanDoInsuranceBetting()
+        {
+            DialogResult result;
+
+            result = MessageBox.Show("You can Insurance betting now!");
+            label3.Enabled = true;
+        }
+        private void label3_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            if (BP.insurance_bet > bet_amount / 2)
+            {
+                result = MessageBox.Show("베팅 금액의 절반까지만 베팅할 수 있습니다! 다시 베팅해주세요");
+            }
+            else
+            {
+                BP.insurance_bet = bet_amount;
+                //textBox4.Text = BP.insurance_bet.ToString();
+                //인슈런스 베팅은 가상의 금액이라고 생각해야함 ( 캐시에서 빼는거 아님)
+                bet_amount = 0;
+                textBox2.Text = bet_amount.ToString();
+            }
+            label3.Enabled = false;
         }
     }
 

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using blackjack_windform.Properties;
 
 using BP = Blackjack.Program;
+using System.Security.Cryptography.X509Certificates;
 
 namespace blackjack_windform
 {

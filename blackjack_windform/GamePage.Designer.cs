@@ -135,6 +135,7 @@
             label3.Size = new Size(318, 33);
             label3.TabIndex = 2;
             label3.Text = "I N S U R A N C E  P A Y S  2 T 0 1";
+            label3.Click += label3_Click;
             // 
             // pictureBox1
             // 
