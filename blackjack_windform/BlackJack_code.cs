@@ -268,7 +268,7 @@ namespace Blackjack
                 //push(무승부) 배팅금액을 돌려받는다.
                 //Console.WriteLine("Draw");
                 result = "Draw";
-                user.cash += blackjack_windform.GamePage.bet_amount;
+                user.cash += blackjack_windform.GamePage.total_betamount;
 
             }
             else if (BlackJack(user))
@@ -276,9 +276,9 @@ namespace Blackjack
                 //Console.WriteLine("User Win");
                 result = "User Win";
                 result += "\nUser get ";
-                result += (blackjack_windform.GamePage.bet_amount * 2.5).ToString();
+                result += (blackjack_windform.GamePage.total_betamount * 2.5).ToString();
 
-                user.cash += blackjack_windform.GamePage.bet_amount * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
+                user.cash += blackjack_windform.GamePage.total_betamount * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
             }
             else if (BlackJack(dealer))
             {
@@ -290,8 +290,8 @@ namespace Blackjack
                 //Console.WriteLine("Dealer Busted");
                 result = "User Win";
                 result += "\nUser get ";
-                result += (blackjack_windform.GamePage.bet_amount * 2.0).ToString();
-                user.cash += blackjack_windform.GamePage.bet_amount * 2.0;
+                result += (blackjack_windform.GamePage.total_betamount * 2.0).ToString();
+                user.cash += blackjack_windform.GamePage.total_betamount * 2.0;
 
             }
             else if (user.busted)
@@ -312,8 +312,8 @@ namespace Blackjack
                     //Console.WriteLine("User Win");
                     result = "User Win";
                     result += "\nUser get ";
-                    result += (blackjack_windform.GamePage.bet_amount * 2.0).ToString();
-                    user.cash += blackjack_windform.GamePage.bet_amount * 2.0;    //유저 승리 배팅금액의 두배를 돌려받는다.
+                    result += (blackjack_windform.GamePage.total_betamount * 2.0).ToString();
+                    user.cash += blackjack_windform.GamePage.total_betamount * 2.0;    //유저 승리 배팅금액의 두배를 돌려받는다.
                                                                                   //Console.WriteLine("user get {0}", user.bet_cash * 2.0);
 
                 }
@@ -322,7 +322,7 @@ namespace Blackjack
                     //push(무승부) 배팅금액을 돌려받는다.
                     //Console.WriteLine("Draw");
                     result = "Draw";
-                    user.cash += blackjack_windform.GamePage.bet_amount;
+                    user.cash += blackjack_windform.GamePage.total_betamount;
                 }
             }
             return result;
@@ -334,6 +334,8 @@ namespace Blackjack
             if (user.cash > 0)          //유저가 돈이 남아있다면 새로운 게임 시작
             {
                 blackjack_windform.GamePage.bet_amount = 0;
+                blackjack_windform.GamePage.total_betamount = 0;
+
                 dealer.card_cnt = 0;
                 user.card_cnt = 0;
                 dealer.busted = false;

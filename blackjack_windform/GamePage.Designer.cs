@@ -75,6 +75,8 @@
             label10 = new Label();
             textBox5 = new TextBox();
             textBox6 = new TextBox();
+            button7 = new Button();
+            button8 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox0).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -622,12 +624,34 @@
             textBox6.TabIndex = 64;
             textBox6.TextChanged += textBox6_TextChanged;
             // 
+            // button7
+            // 
+            button7.Location = new Point(269, 430);
+            button7.Name = "button7";
+            button7.Size = new Size(91, 32);
+            button7.TabIndex = 65;
+            button7.Text = "Confirm";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(452, 430);
+            button8.Name = "button8";
+            button8.Size = new Size(91, 32);
+            button8.TabIndex = 65;
+            button8.Text = "Cancel";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
             // GamePage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGreen;
             ClientSize = new Size(844, 492);
+            Controls.Add(button8);
+            Controls.Add(button7);
             Controls.Add(textBox6);
             Controls.Add(textBox5);
             Controls.Add(label10);
@@ -678,6 +702,7 @@
             Margin = new Padding(2);
             Name = "GamePage";
             Text = "GamePage";
+            FormClosing += GamePage_FormClosing;
             Load += GamePage_Load;
             Shown += GamePage_Shown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -750,13 +775,15 @@
         private PictureBox pictureBox22;
         private PictureBox pictureBox23;
         private PictureBox pictureBox24;
-        private TextBox textBox3;
-        private TextBox textBox4;
         private Label label7;
         private Label label8;
         private Label label9;
         private Label label10;
         private TextBox textBox5;
         private TextBox textBox6;
+        private Button button7;
+        private Button button8;
+        public TextBox textBox3;
+        public TextBox textBox4;
     }
 }
