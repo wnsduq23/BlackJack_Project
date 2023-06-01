@@ -434,9 +434,9 @@ namespace Blackjack
         static private void AskForPairBetting(User user)
         {
             DialogResult result;
-            result = MessageBox.Show("Do you want to Pair Betting?", "Pairbetting", MessageBoxButtons.OKCancel);
+            result = MessageBox.Show("Do you want to Pair Betting?", "Pairbetting", MessageBoxButtons.YesNo);
 
-            if (result == DialogResult.OK)
+            if (result == DialogResult.Yes)
             {
                 PairBetting form = new PairBetting();
                 form.ShowDialog();
