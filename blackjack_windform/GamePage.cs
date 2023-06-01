@@ -400,7 +400,7 @@ namespace blackjack_windform
                 //}
 
                 boxes[dealer_index].Visible = true;
-                boxes[dealer_index++].Image = StartPage.cardImage[dealing];
+                boxes[dealer_index++].Image = StartPage.back_card;
                 dealer.GetCard(BP.all_card[dealing++]);
 
                 boxes[user_index].Visible = true;
@@ -469,7 +469,7 @@ namespace blackjack_windform
                     while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
                     {
                         boxes[dealer_index].Visible = true;
-                        boxes[dealer_index++].Image = StartPage.cardImage[dealing];
+                        boxes[dealer_index++].Image = StartPage.back_card;
                         dealer.GetCard(BP.all_card[dealing++]);
 
                         //카드받을 때마다 점수 보여주기
@@ -519,7 +519,7 @@ namespace blackjack_windform
                         while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
                         {
                             boxes[dealer_index].Visible = true;
-                            boxes[dealer_index++].Image = StartPage.cardImage[dealing];
+                            boxes[dealer_index++].Image = StartPage.back_card;
                             dealer.GetCard(BP.all_card[dealing++]);
 
                             //카드받을 때마다 점수 보여주기
