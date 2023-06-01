@@ -16,8 +16,6 @@ namespace blackjack_windform
 {
     public partial class GamePage : Form
     {
-        private bool insurance_box_has_value = false;
-
         public static double bet_amount = 0;
 
         public static double total_betamount = 0;
@@ -403,9 +401,8 @@ namespace blackjack_windform
                 else
                 {
                     label1.Enabled = false;
+                    textBox5.Text = BP.insurance_bet.ToString();
                 }
-                BP.insurance_bet = (int)bet_amount;
-                textBox5.Text = BP.insurance_bet.ToString();
 
                 boxes[dealer_index].Visible = true;
                 boxes[dealer_index++].Image = StartPage.back_card;
@@ -595,20 +592,18 @@ namespace blackjack_windform
         {
             DialogResult result;
 
-            InsuranceLabelTaskCompletionSource?.SetResult(true);
-            if (BP.insurance_bet > bet_amount / 2)
+            if (BP.insurance_bet > total_betamount / 2)
             {
                 result = MessageBox.Show("베팅 금액의 절반까지만 베팅할 수 있습니다! 다시 베팅해주세요");
             }
             else
             {
-                BP.insurance_bet = (int)bet_amount;
+                BP.insurance_bet = (int)total_betamount;
                 textBox5.Text = BP.insurance_bet.ToString();
                 //캐시(소지금)에서 insurance betting 만큼 빼는 거였음..
-                bet_amount = 0;
-                textBox2.Text = bet_amount.ToString();
             }
             label3.Enabled = false;
+            InsuranceLabelTaskCompletionSource?.SetResult(true);
         }
 
         private void label9_Click(object sender, EventArgs e)
@@ -628,7 +623,7 @@ namespace blackjack_windform
 
         private void textBox5_TextChanged(object sender, EventArgs e)// insurance bet
         {
-            insurance_box_has_value = !string.IsNullOrEmpty(textBox5.Text);
+
         }
 
         private void button7_Click(object sender, EventArgs e) // 베팅확정
