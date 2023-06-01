@@ -367,6 +367,13 @@ namespace blackjack_windform
 
             while (user.cash > 0)        // 유저 잔고가 0이상일 경우 계속 게임을 할 수 있다.
             {
+                int[] backcard = new int[12];
+                int backcard_index = 0;
+                int backcard_first_index = 1;
+                int backcard_idx = 0;
+
+
+
                 dealer_index = 0;
                 user_index = 12;
                 dealing = 0;  //나눠줄 올카드 인덱스
@@ -406,6 +413,7 @@ namespace blackjack_windform
 
                 boxes[dealer_index].Visible = true;
                 boxes[dealer_index++].Image = StartPage.back_card;
+                backcard[backcard_index++] = dealing;
                 dealer.GetCard(BP.all_card[dealing++]);
 
                 boxes[user_index].Visible = true;
@@ -432,6 +440,8 @@ namespace blackjack_windform
 
                 if (surrender)
                 {
+                    boxes[backcard_first_index].Image = StartPage.cardImage[backcard[backcard_idx]];
+
                     MessageBox.Show("Dealer Win");
                     clearImage();
                     BP.NewGame(dealer, user);
@@ -471,6 +481,11 @@ namespace blackjack_windform
 
                     if (user.busted)            //유저가 버스트 되었다면 게임 종료
                     {
+                        for (int i = 0; i < backcard_index; i++)
+                        {
+                            boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
+                        }
+
                         showResult(dealer, user);
                         clearImage();
                         BP.NewGame(dealer, user);
@@ -485,11 +500,17 @@ namespace blackjack_windform
                     {
                         boxes[dealer_index].Visible = true;
                         boxes[dealer_index++].Image = StartPage.back_card;
+                        backcard[backcard_index++] = dealing;
                         dealer.GetCard(BP.all_card[dealing++]);
 
                         //카드받을 때마다 점수 보여주기
                         textBox3.Text = Convert.ToString(dealer.score);
                         textBox4.Text = Convert.ToString(user.score);
+                    }
+
+                    for (int i = 0; i < backcard_index; i++)
+                    {
+                        boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
                     }
 
                     showResult(dealer, user);
@@ -535,6 +556,7 @@ namespace blackjack_windform
                         {
                             boxes[dealer_index].Visible = true;
                             boxes[dealer_index++].Image = StartPage.back_card;
+                            backcard[backcard_index++] = dealing;
                             dealer.GetCard(BP.all_card[dealing++]);
 
                             //카드받을 때마다 점수 보여주기
@@ -550,6 +572,10 @@ namespace blackjack_windform
 
                 if (user.busted)            //유저가 버스트 되었다면 게임 종료
                 {
+                    for (int i = 0; i < backcard_index; i++)
+                    {
+                        boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
+                    }
                     showResult(dealer, user);
                     clearImage();
                     BP.NewGame(dealer, user);
@@ -563,6 +589,10 @@ namespace blackjack_windform
                 while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
                 {
                     dealer.GetCard(BP.all_card[dealing++]);
+                }
+                for (int i = 0; i < backcard_index; i++)
+                {
+                    boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
                 }
                 showResult(dealer, user); //게임 결과
                 clearImage();
