@@ -559,6 +559,8 @@ namespace blackjack_windform
                 int backcard_first_index = 1;
                 int backcard_idx = 0;
 
+                label7.Visible = false;
+                textBox3.Visible = false;
 
 
                 dealer_index = 0;
@@ -630,6 +632,9 @@ namespace blackjack_windform
                 {
                     boxes[backcard_first_index].Image = StartPage.cardImage[backcard[backcard_idx]];
 
+                    label7.Visible = true;
+                    textBox3.Visible = true;
+
                     MessageBox.Show("Dealer Win");
                     clearImage();
                     BP.NewGame(dealer, user);
@@ -674,6 +679,9 @@ namespace blackjack_windform
                             boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
                         }
 
+                        label7.Visible = true;
+                        textBox3.Visible = true;
+
                         showResult(dealer, user);
                         clearImage();
                         BP.NewGame(dealer, user);
@@ -700,6 +708,9 @@ namespace blackjack_windform
                     {
                         boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
                     }
+
+                    label7.Visible = true;
+                    textBox3.Visible = true;
 
                     showResult(dealer, user);
                     clearImage();
@@ -764,6 +775,9 @@ namespace blackjack_windform
                     {
                         boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
                     }
+                    label7.Visible = true;
+                    textBox3.Visible = true;
+
                     showResult(dealer, user);
                     clearImage();
                     BP.NewGame(dealer, user);
@@ -782,6 +796,9 @@ namespace blackjack_windform
                 {
                     boxes[backcard_first_index++].Image = StartPage.cardImage[backcard[i]];
                 }
+                label7.Visible = true;
+                textBox3.Visible = true;
+
                 showResult(dealer, user); //게임 결과
                 clearImage();
                 BP.NewGame(dealer, user);
