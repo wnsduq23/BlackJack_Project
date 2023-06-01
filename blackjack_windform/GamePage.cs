@@ -16,6 +16,8 @@ namespace blackjack_windform
 {
     public partial class GamePage : Form
     {
+    private bool insurance_box_has_value = false;
+
         public static double bet_amount = 0;
         public GamePage()
         {
@@ -188,6 +190,7 @@ namespace blackjack_windform
              */
             int dealing;
             bool surrender;
+            bool ask_for_insurance;
             char[] shape = { 'c', 'd', 'h', 's' };
             bet_amount = 0;
 
@@ -212,8 +215,10 @@ namespace blackjack_windform
                 BP.Shuffle();  //카드를 섞는다. 
                 textBox1.Text = user.cash.ToString();
                 //user.bet_cash = BP.Betting(user, 1);       //배팅
-                textBox2.Text = user.bet_cash.ToString();
-                // user.pair_bet = BP.PairBetting(user);
+                textBox2.Text = bet_amount.ToString();
+                BP.pair_bet = BP.PairBetting(user);
+
+                textBox6.Text = BP.pair_bet.ToString();
 
                 //Surrender을 실행하기전 먼저 배팅을 해야하기 때문에 5초동안의 배팅할 시간을 주고 이후 surrender 여부를 판단하는 messagebox가 뜨도록 구현
                 MessageBox.Show("You have 2 seoconds to place your bets !!");
@@ -229,7 +234,21 @@ namespace blackjack_windform
                 dealer.GetCard(BP.all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
                                                                  // dealer가 ace카드 일 때의 예시 넣기
                                                                  //딜러의 카드가 ace일때 insurance 할지
-                                                                 // BP.Insuarance(dealer, user);
+                ask_for_insurance = BP.Insuarance(dealer, user);
+                if (ask_for_insurance)
+                {
+                    CanDoInsuranceBetting();
+                }
+                else
+                {
+                    label1.Enabled = false;
+                    textBox5.Text = BP.insurance_bet.ToString();
+                }
+
+                //while (!insurance_box_has_value)
+                //{
+                //    System.Threading.Thread.Sleep(100);
+                //}
 
                 boxes[dealer_index++].Image = blackjack_windform.StartPage.cardImage[dealing];
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -244,11 +263,15 @@ namespace blackjack_windform
                 user.GetCard(BP.all_card[dealing++]);
 
                 if (BP.pair_bet > 0)
+                {
                     BP.CheckPairBetting(user);
+                    textBox1.Text = user.cash.ToString(); // 여기 왜 최신화가 안되지 ?
+                }
 
                 //카드받을 때마다 점수 보여주기
                 textBox3.Text = Convert.ToString(dealer.score);
                 textBox4.Text = Convert.ToString(user.score);
+
 
                 surrender = Surrender(dealer, user);
 
@@ -257,6 +280,8 @@ namespace blackjack_windform
                     MessageBox.Show("Dealer Win");
                     clearImage();
                     BP.NewGame(dealer, user);
+                    textBox5.Text = "";
+                    textBox6.Text = "";
                     continue;
                 }
                 // dealing = BP.DoubleDown(user, dealing);
@@ -289,6 +314,8 @@ namespace blackjack_windform
                         showResult(dealer, user);
                         clearImage();
                         BP.NewGame(dealer, user);
+                        textBox5.Text = "";
+                        textBox6.Text = "";
                         continue;
                     }
 
@@ -306,6 +333,8 @@ namespace blackjack_windform
                     showResult(dealer, user);
                     clearImage();
                     BP.NewGame(dealer, user);
+                    textBox5.Text = "";
+                    textBox6.Text = "";
                     continue;
                 }
 
@@ -355,6 +384,8 @@ namespace blackjack_windform
                     showResult(dealer, user);
                     clearImage();
                     BP.NewGame(dealer, user);
+                    textBox5.Text = "";
+                    textBox6.Text = "";
                     continue;
                 }
 
@@ -365,6 +396,8 @@ namespace blackjack_windform
                 showResult(dealer, user); //게임 결과
                 clearImage();
                 BP.NewGame(dealer, user);
+                textBox5.Text = "";
+                textBox6.Text = "";
             }
 
         }
@@ -391,13 +424,33 @@ namespace blackjack_windform
             }
             else
             {
-                BP.insurance_bet = bet_amount;
-                //textBox4.Text = BP.insurance_bet.ToString();
-                //인슈런스 베팅은 가상의 금액이라고 생각해야함 ( 캐시에서 빼는거 아님)
+                BP.insurance_bet = (int)bet_amount;
+                textBox5.Text = BP.insurance_bet.ToString();
+                //인슈런스 베팅은 가상의 금액이라고 생각해야함 ( 캐시에서 빼는거 아님 )
                 bet_amount = 0;
                 textBox2.Text = bet_amount.ToString();
             }
             label3.Enabled = false;
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e) // pair bet
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)// insurance bet
+        {
+            insurance_box_has_value = !string.IsNullOrEmpty(textBox5.Text);
         }
     }
 

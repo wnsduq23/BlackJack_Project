@@ -32,7 +32,6 @@ namespace Blackjack
             public int score = 0;
             //플레이어가 가지고있는 a의 갯수
             public int ace_cnt = 0;
-            public int bet_cash = 0;
             public int card_cnt = 0;
             public bool stay = false;
             public bool busted = false; // 플레이어가 버스트 되었는지 여부
@@ -114,7 +113,7 @@ namespace Blackjack
             {
                 if (!BlackJack(dealer))  //딜러가 블랙잭이 아닐시 
                 {
-                    this.cash += bet_cash / 2;
+                    this.cash += blackjack_windform.GamePage.bet_amount / 2;
                 }
             }
 
@@ -420,6 +419,7 @@ namespace Blackjack
             else
             {
                 result = MessageBox.Show("It's not pair... you lose bet cash...");
+                user.cash -= pair_bet;
             }
         }
         static private void AskForPairBetting(User user)
@@ -440,25 +440,14 @@ namespace Blackjack
 
         //상대가 블랙잭이 나올걸 대비해 베팅금액의 절반까지 인슈어런스로 지불할 수 있다.
         //인슈어런스 여부 확인 함수
-        static public int Insuarance(Dealer dealer, User user)
+        static public bool Insuarance(Dealer dealer, User user) // insurance를 베팅했으면 true, 나머지는 false
         {
-            int insurance_betting = 0;
-
             //딜러의 업카드가 Ace일 때 유저에게 묻는다.
             if (dealer.player_cards[0].value == 11)//이거 처음 받는 카드니까 ace를 11로 생각했을꺼고.. 그래서 11 값이랑 비교
             {
-                if (AskForInsurance())
-                {
-                    //인슈어런스에 얼마를 베팅할지
-                    //여기에 CandoInsurance() 넣어야하는데..어떻게..
-                }
-                //insurance_betting을 하였다면
-                //if (insurance_betting > 0)
-                //{
-                 //   Console.WriteLine("You bet {0} on dealer's blackjack insurance.", insurance_betting);
-                //}
+                return (AskForInsurance());
             }
-            return (insurance_betting);
+            return (false);
         }
         static public void CheckInsuranceBetting(Dealer dealer, User user)
         {
@@ -468,7 +457,7 @@ namespace Blackjack
             if (BlackJack(dealer))
             {
                 user.cash += insurance_bet * 2;
-                user.bet_cash = 0;
+                blackjack_windform.GamePage.bet_amount = 0;
                 result = MessageBox.Show("Dealer has blackjack! Insurance pays 2 to 1.");
             }
             // 블랙잭이 아니였다면 
@@ -478,7 +467,7 @@ namespace Blackjack
                 user.cash -= insurance_bet;
                 //플레이어가 블랙잭이였다면 
                 if (user.score == 21)
-                    user.cash += user.bet_cash * 1.5;
+                    user.cash += blackjack_windform.GamePage.bet_amount * 1.5;
 
             }
         }
@@ -495,9 +484,6 @@ namespace Blackjack
             else
             {
                 insurance_bet = 0;
-
-                //insurance_bet.text = insurance_bet.ToString();
-                //blackjack_windform.Enabled = false 추가 ... 해야하는데..
                 return (false);
             }
         }

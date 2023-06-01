@@ -71,6 +71,10 @@
             textBox4 = new TextBox();
             label7 = new Label();
             label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            textBox5 = new TextBox();
+            textBox6 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox0).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -246,6 +250,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(57, 23);
             textBox1.TabIndex = 26;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
@@ -572,12 +577,61 @@
             label8.TabIndex = 60;
             label8.Text = "User Score :";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.BackColor = Color.FromArgb(64, 64, 64);
+            label9.ForeColor = Color.White;
+            label9.Location = new Point(716, 341);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(79, 15);
+            label9.TabIndex = 61;
+            label9.Text = "Insurance Bet";
+            label9.Click += label9_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.FromArgb(64, 64, 64);
+            label10.ForeColor = Color.White;
+            label10.Location = new Point(716, 399);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(48, 15);
+            label10.TabIndex = 62;
+            label10.Text = "Pair Bet";
+            // 
+            // textBox5
+            // 
+            textBox5.BackColor = Color.Gray;
+            textBox5.Location = new Point(716, 358);
+            textBox5.Margin = new Padding(2);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(57, 23);
+            textBox5.TabIndex = 63;
+            textBox5.TextChanged += textBox5_TextChanged;
+            // 
+            // textBox6
+            // 
+            textBox6.BackColor = Color.Gray;
+            textBox6.Location = new Point(716, 416);
+            textBox6.Margin = new Padding(2);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(57, 23);
+            textBox6.TabIndex = 64;
+            textBox6.TextChanged += textBox6_TextChanged;
+            // 
             // GamePage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGreen;
             ClientSize = new Size(844, 492);
+            Controls.Add(textBox6);
+            Controls.Add(textBox5);
+            Controls.Add(label10);
+            Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(textBox4);
@@ -700,5 +754,9 @@
         private TextBox textBox4;
         private Label label7;
         private Label label8;
+        private Label label9;
+        private Label label10;
+        private TextBox textBox5;
+        private TextBox textBox6;
     }
 }

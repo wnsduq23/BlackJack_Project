@@ -36,11 +36,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(102, 20);
+            label1.Location = new Point(69, 20);
             label1.Name = "label1";
-            label1.Size = new Size(149, 45);
+            label1.Size = new Size(203, 45);
             label1.TabIndex = 0;
-            label1.Text = "얼마를 베팅하시겠습니까?\r\n(현재 소유 금액 : 200)\r\n숫자로 작성해주세요.";
+            label1.Text = "얼마를 베팅하시겠습니까?\r\n현재 소유 금액보다 적게 적어주세요\r\n숫자로 작성해주세요.";
+            label1.Click += label1_Click;
             // 
             // textBox1
             // 

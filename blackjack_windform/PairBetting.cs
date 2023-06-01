@@ -30,10 +30,13 @@ namespace blackjack_windform
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //pair_bet textbox에 값 집어넣기
-            //textbox2.Text = BP.pair_bet.ToString();
             BP.pair_bet = int.Parse(textBox1.Text);
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
