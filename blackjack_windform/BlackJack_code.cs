@@ -274,8 +274,8 @@ namespace Blackjack
             else if (BlackJack(user))
             {
                 //Console.WriteLine("User Win");
-                result = "User Win";
-                result += "\nUser get ";
+                result = "You Win";
+                result += "\nYou won $";
                 result += (blackjack_windform.GamePage.bet_amount * 2.5).ToString();
 
                 user.cash += blackjack_windform.GamePage.bet_amount * 2.5;    //유저가 블랙잭으로 이길 경우 배팅 금액 2.5배를 딴다.
@@ -288,8 +288,8 @@ namespace Blackjack
             else if (dealer.busted)
             {
                 //Console.WriteLine("Dealer Busted");
-                result = "User Win";
-                result += "\nUser get ";
+                result = "You Win";
+                result += "\nYou won $";
                 result += (blackjack_windform.GamePage.bet_amount * 2.0).ToString();
                 user.cash += blackjack_windform.GamePage.bet_amount * 2.0;
 
@@ -310,8 +310,8 @@ namespace Blackjack
                 else if (dealer.score < user.score)
                 {
                     //Console.WriteLine("User Win");
-                    result = "User Win";
-                    result += "\nUser get ";
+                    result = "You Win";
+                    result += "\nYou won $";
                     result += (blackjack_windform.GamePage.bet_amount * 2.0).ToString();
                     user.cash += blackjack_windform.GamePage.bet_amount * 2.0;    //유저 승리 배팅금액의 두배를 돌려받는다.
                                                                                   //Console.WriteLine("user get {0}", user.bet_cash * 2.0);
@@ -487,83 +487,5 @@ namespace Blackjack
                 return (false);
             }
         }
-
-        //게임을 진행해주는 함수
-        /*static public void GameStart()
-        {
-            *//*
-            ----------안에서 여러가지 함수 실행되며 게임 진행됨-----------
-            -대략적인 진행상황(카드를 받을 때마다 카드의 정보를 show_card를 통해 보여줌, score계산으로 21이 넘는지 계속 확인)-
-            카드 셔플 진행 -> 배팅 진행 -> 페어 배팅 여부 확인 -> 플레이어1과 딜러 카드 2장씩 부여받음 -> 서렌더 여부 판단 -> 인슈어런스 여부 판단 -> 
-            더블다운 여부 확인 -> hit or stay 여부 확인 -> 등 등 계속 게임 진행 -> 21이 넘지 않고 게임 마무리될경우 result_game으로 결과 확인
-             *//*
-            int dealing;
-            int pair_bet;
-            bool surrender;
-            char[] shape = { 's', 'c', 'h', 'd' };
-            User user = new User();
-            Dealer dealer = new Dealer();
-
-            for (int i = 0; i < 4; i++)           //카드 정보입력
-            {
-                for (int j = 0; j < 13; j++)
-                {
-                    PushInformationCard(shape[i], j + 1);
-                }
-            }
-            while (user.cash > 0)        // 유저 잔고가 0이상일 경우 계속 게임을 할 수 있다.
-            {
-                dealing = 0;  //나눠줄 올카드 인덱스
-                Shuffle();  //카드를 섞는다. 
-                user.bet_cash = Betting(user,1);       //배팅
-
-                user.pair_bet = PairBetting(user);
-
-                dealer.GetCard(all_card[dealing++]);          //딜러와 유저 카드 두장씩 받는다.
-                // dealer가 ace카드 일 때의 예시 넣기
-                //딜러의 카드가 ace일때 insurance 할지
-                Insuarance(dealer, user);
-
-                dealer.GetCard(all_card[dealing++]);
-                user.GetCard(all_card[dealing++]);
-                user.GetCard(all_card[dealing++]);
-
-                if (user.insurance_bet > 0)
-                    CheckInsuranceBetting(dealer, user);
-                if (user.pair_bet > 0)
-                    CheckPairBetting(user);
-
-
-                surrender = user.Surrender(dealer);            //서렌더, 더블다운, 인슈어런스 여부 판단
-                if (surrender)
-                {
-                    NewGame(dealer, user);
-                    continue;
-                }
-                dealing = DoubleDown(user, dealing);
-
-                while (!user.busted && !user.stay)             //유저가 버스트되던가 stay를 외칠때까지 HitOrStay 반복
-                {
-                    dealing = HitOrStay(user, dealing);
-                }
-
-                if (user.busted)            //유저가 버스트 되었다면 게임 종료
-                {
-                    NewGame(dealer, user);
-                    continue;
-                }
-
-                while (!dealer.busted && dealer.score < 17)    //유저가 카드 받기를 멈췄고 버스트되지 않았다면 점수가 17이상이 될떄까지 딜러가 카드를 받기 시작한다.
-                {
-                    dealer.GetCard(all_card[dealing++]);
-                }
-
-                ResultGame(dealer, user);  //게임 결과
-
-
-            }*/
-        /*
-                }*/
-        //메인함수에서 game_start 진행
     }
 }

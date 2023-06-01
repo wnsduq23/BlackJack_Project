@@ -127,6 +127,13 @@ namespace blackjack_windform
             string result;
             result = BP.ResultGame(dealer, user);
             MessageBox.Show(result);
+
+            DialogResult dialogResult;
+            dialogResult = MessageBox.Show("Wanna play more?", "BlackJack", MessageBoxButtons.OKCancel);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                Environment.Exit(0);
+            }
         }
         public void clearImage()  //카드 이미지 clear 
         {
